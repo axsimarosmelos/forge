@@ -31,8 +31,9 @@
     if(s.workspaceEpoch!==undefined&&(typeof s.workspaceEpoch!=='string'||!/^[a-z0-9]{1,50}$/.test(s.workspaceEpoch)))throw Error('Invalid workspace storage identity.');
     for(const a of s.attempts){if(!plain(a)||!safeID(a.pid)||!platforms.includes(a.platform)||!['independent','hinted','stuck'].includes(a.outcome)||!Number.isFinite(a.at)||a.at<0||!Number.isFinite(a.minutes)||a.minutes<1||a.minutes>600||typeof a.note!=='string'||a.note.length>10000||typeof a.difficulty!=='string'||(a.rating!==null&&(!Number.isFinite(a.rating)||a.rating<0||a.rating>10000)))throw Error('Invalid practice attempt.');}
     for(const [id,w] of Object.entries(s.workspaces)){
-      if(!safeID(id)||!plain(w)||!['python','c','cpp'].includes(w.language)||!plain(w.drafts)||typeof w.statement!=='string'||w.statement.length>100000||typeof w.notes!=='string'||w.notes.length>50000||typeof w.stdin!=='string'||w.stdin.length>50000||typeof w.expected!=='string'||w.expected.length>50000||typeof w.video!=='string'||w.video&&!/^[A-Za-z0-9_-]{11}$/.test(w.video))throw Error('Invalid problem workspace.');
+      if(!safeID(id)||!plain(w)||!ForgeLearningCore.language(w.language)||!plain(w.drafts)||typeof w.statement!=='string'||w.statement.length>100000||typeof w.notes!=='string'||w.notes.length>50000||typeof w.stdin!=='string'||w.stdin.length>50000||typeof w.expected!=='string'||w.expected.length>50000||typeof w.video!=='string'||w.video&&!/^[A-Za-z0-9_-]{11}$/.test(w.video))throw Error('Invalid problem workspace.');
       if(w.helpAt!==undefined&&(!Number.isFinite(w.helpAt)||w.helpAt<0))throw Error('Invalid help history.');
+      ForgeLearningCore.validateWorkspace(w);
       for(const lang of ['python','c','cpp'])if(typeof w.drafts[lang]!=='string'||w.drafts[lang].length>100000)throw Error('Invalid saved problem code.');
     }
     return s;
@@ -74,6 +75,6 @@
     }).sort((a,b)=>b.score-a.score||String(a.problem.number).localeCompare(String(b.problem.number),undefined,{numeric:true}));
   }
   function videoID(value){try{const u=new URL(value);if(u.protocol!=='https:')return '';let id='';if(u.hostname==='youtu.be')id=u.pathname.slice(1);else if(['youtube.com','www.youtube.com','m.youtube.com'].includes(u.hostname)){id=u.searchParams.get('v')||u.pathname.match(/^\/(?:embed|shorts)\/([^/]+)$/)?.[1]||'';}return /^[A-Za-z0-9_-]{11}$/.test(id)?id:'';}catch{return '';}}
-  function tutorURL(code,language,stdin='',embed=false){const q=new URLSearchParams({code,py:language==='python'?'3':language,mode:'edit',cumulative:'false',heapPrimitives:'nevernest',textReferences:'false',rawInputLstJSON:JSON.stringify(stdin?stdin.replace(/\n$/,'').split('\n'):[])});return 'https://pythontutor.com/'+(embed?'iframe-embed.html':'visualize.html')+'#'+q.toString();}
+  function tutorURL(code,language,stdin='',embed=false){const q=new URLSearchParams({code,py:language==='python'?'3':language==='javascript'?'js':language,mode:'edit',cumulative:'false',heapPrimitives:'nevernest',textReferences:'false',rawInputLstJSON:JSON.stringify(stdin?stdin.replace(/\n$/,'').split('\n'):[])});return 'https://pythontutor.com/'+(embed?'iframe-embed.html':'visualize.html')+'#'+q.toString();}
   root.ForgeCatalogCore={platforms,validDate,addMonths,days,safeID,safeURL,catalog,defaults,validate,latest,solved,level,leetcodeLevel,pace,recommendations,videoID,tutorURL};
 })(globalThis);

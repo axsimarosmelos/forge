@@ -1,0 +1,703 @@
+{
+  "version": 1,
+  "book": {
+    "title": "The C Programming Language",
+    "edition": "Second edition",
+    "authors": [
+      "Brian W. Kernighan",
+      "Dennis M. Ritchie"
+    ],
+    "basis": "Chapter and exercise references checked against the uploaded PDF. The book itself is not published with Forge.",
+    "modernC": "Use C17 declarations, int main(void), checked bounded input and explicit ownership. The book predates C17; Chapter 8 is UNIX-specific. Avoid gets, implicit function declarations and assumptions about integer widths."
+  },
+  "weeks": [
+    {
+      "week": 1,
+      "month": 1,
+      "title": "Input, expressions and small decisions",
+      "bookReading": "1.1–1.5",
+      "bookExercises": [
+        "1-1",
+        "1-3",
+        "1-7"
+      ],
+      "lessons": {
+        "c": [
+          "c-start",
+          "c-io",
+          "c-control"
+        ],
+        "python": [
+          "hello",
+          "input",
+          "if"
+        ],
+        "cpp": [
+          "cpp-start",
+          "cpp-io",
+          "cpp-control"
+        ]
+      },
+      "problems": [
+        "cf-4-A",
+        "at-abc086_a",
+        "lc-2235"
+      ],
+      "objectives": [
+        "Keep getchar results in int so every character remains distinct from EOF.",
+        "Predict integer division and test both branches of a condition."
+      ],
+      "project": "Write a temperature-table program with named bounds. Test reversed bounds, one row and the normal range.",
+      "days": [
+        "Read and trace the first concept",
+        "Implement a tiny example and boundary tests",
+        "Attempt two matching problems",
+        "Read the next section and solve exercises",
+        "Practice an unfamiliar variation",
+        "Timed set, then explain every mistake",
+        "Revision and catch-up; no required new topic"
+      ]
+    },
+    {
+      "week": 2,
+      "month": 1,
+      "title": "Loops, arrays and character streams",
+      "bookReading": "1.6–1.10",
+      "bookExercises": [
+        "1-13",
+        "1-19"
+      ],
+      "lessons": {
+        "c": [
+          "c-arrays"
+        ],
+        "python": [
+          "loops",
+          "lists",
+          "strings"
+        ],
+        "cpp": [
+          "cpp-sequences"
+        ]
+      },
+      "problems": [
+        "cf-71-A",
+        "at-abc081_a",
+        "lc-1920"
+      ],
+      "objectives": [
+        "Reserve room for the string terminator and pass array lengths explicitly.",
+        "Draw the accumulator after each iteration before running the program."
+      ],
+      "project": "Write a bounded line reverser. Preserve spaces; handle an empty line and a line that fills the buffer.",
+      "days": [
+        "Read and trace the first concept",
+        "Implement a tiny example and boundary tests",
+        "Attempt two matching problems",
+        "Read the next section and solve exercises",
+        "Practice an unfamiliar variation",
+        "Timed set, then explain every mistake",
+        "Revision and catch-up; no required new topic"
+      ]
+    },
+    {
+      "week": 3,
+      "month": 1,
+      "title": "Types, counting and numeric limits",
+      "bookReading": "2.1–2.12",
+      "bookExercises": [
+        "2-1",
+        "2-3",
+        "2-4"
+      ],
+      "lessons": {
+        "c": [
+          "c-arrays"
+        ],
+        "python": [
+          "counting",
+          "math",
+          "complexity"
+        ],
+        "cpp": [
+          "cpp-costs"
+        ]
+      },
+      "problems": [
+        "lc-217",
+        "lc-242",
+        "at-abc081_b",
+        "cf-231-A"
+      ],
+      "objectives": [
+        "Choose integer types from the largest intermediate value, not only the input.",
+        "Use unsigned operands for bit operations and validate shift counts."
+      ],
+      "project": "Build a character-frequency table using unsigned char indices. Check repeated characters and a stream with no letters.",
+      "days": [
+        "Read and trace the first concept",
+        "Implement a tiny example and boundary tests",
+        "Attempt two matching problems",
+        "Read the next section and solve exercises",
+        "Practice an unfamiliar variation",
+        "Timed set, then explain every mistake",
+        "Revision and catch-up; no required new topic"
+      ]
+    },
+    {
+      "week": 4,
+      "month": 1,
+      "title": "Control flow and a first consolidation",
+      "bookReading": "3.1–3.8",
+      "bookExercises": [
+        "3-1",
+        "3-2",
+        "3-4"
+      ],
+      "lessons": {
+        "c": [
+          "c-control",
+          "c-arrays"
+        ],
+        "python": [
+          "brute",
+          "functions"
+        ],
+        "cpp": [
+          "cpp-functions"
+        ]
+      },
+      "problems": [
+        "lc-9",
+        "cf-282-A",
+        "at-abc083_b"
+      ],
+      "objectives": [
+        "State a loop invariant and show that its progress measure terminates.",
+        "Use braces and separate side effects from expressions whose evaluation order is unspecified."
+      ],
+      "project": "Solve three tiny tasks in 45 minutes. Spend the next session rebuilding every failed task without the prior code.",
+      "days": [
+        "Read and trace the first concept",
+        "Implement a tiny example and boundary tests",
+        "Attempt two matching problems",
+        "Read the next section and solve exercises",
+        "Practice an unfamiliar variation",
+        "Timed set, then explain every mistake",
+        "Revision and catch-up; no required new topic"
+      ]
+    },
+    {
+      "week": 5,
+      "month": 2,
+      "title": "Functions, decomposition and sorting",
+      "bookReading": "4.1–4.9",
+      "bookExercises": [
+        "4-1",
+        "4-2",
+        "4-3"
+      ],
+      "lessons": {
+        "c": [
+          "c-pointers"
+        ],
+        "python": [
+          "functions",
+          "sorting"
+        ],
+        "cpp": [
+          "cpp-functions",
+          "cpp-stl-fast-io"
+        ]
+      },
+      "problems": [
+        "lc-1",
+        "lc-977",
+        "cf-339-A",
+        "at-abc088_b"
+      ],
+      "objectives": [
+        "Separate parsing, computation and output into independently testable functions.",
+        "Explain the lifetime and scope of each variable in a helper function."
+      ],
+      "project": "Implement insertion sort over an array with an explicit length. Compare results with a simple hand-sorted oracle.",
+      "days": [
+        "Read and trace the first concept",
+        "Implement a tiny example and boundary tests",
+        "Attempt two matching problems",
+        "Read the next section and solve exercises",
+        "Practice an unfamiliar variation",
+        "Timed set, then explain every mistake",
+        "Revision and catch-up; no required new topic"
+      ]
+    },
+    {
+      "week": 6,
+      "month": 2,
+      "title": "Recursion, headers and prefix sums",
+      "bookReading": "4.10–4.11",
+      "bookExercises": [
+        "4-10",
+        "4-12",
+        "4-13"
+      ],
+      "lessons": {
+        "c": [
+          "c-pointers"
+        ],
+        "python": [
+          "recursion",
+          "prefix"
+        ],
+        "cpp": [
+          "prefix-cpp"
+        ]
+      },
+      "problems": [
+        "lc-303",
+        "lc-1480",
+        "at-abc087_b"
+      ],
+      "objectives": [
+        "Write the base case before the recursive call and trace the call stack.",
+        "Prefer functions to macros when argument evaluation can have side effects."
+      ],
+      "project": "Write prefix sums with a zero sentinel. Test first-element, last-element and full-array queries.",
+      "days": [
+        "Read and trace the first concept",
+        "Implement a tiny example and boundary tests",
+        "Attempt two matching problems",
+        "Read the next section and solve exercises",
+        "Practice an unfamiliar variation",
+        "Timed set, then explain every mistake",
+        "Revision and catch-up; no required new topic"
+      ]
+    },
+    {
+      "week": 7,
+      "month": 2,
+      "title": "Pointers, strings and two pointers",
+      "bookReading": "5.1–5.5",
+      "bookExercises": [
+        "5-1",
+        "5-3",
+        "5-4"
+      ],
+      "lessons": {
+        "c": [
+          "c-pointers",
+          "c-memory"
+        ],
+        "python": [
+          "twopointers",
+          "window"
+        ],
+        "cpp": [
+          "cpp-sequences"
+        ]
+      },
+      "problems": [
+        "lc-125",
+        "lc-167",
+        "lc-643",
+        "cf-279-B"
+      ],
+      "objectives": [
+        "Draw which live allocation each pointer belongs to before doing arithmetic.",
+        "Never return the address of an automatic local object."
+      ],
+      "project": "Implement an in-place string reversal and a two-pointer pair search. Trace a one-element input and repeated values.",
+      "days": [
+        "Read and trace the first concept",
+        "Implement a tiny example and boundary tests",
+        "Attempt two matching problems",
+        "Read the next section and solve exercises",
+        "Practice an unfamiliar variation",
+        "Timed set, then explain every mistake",
+        "Revision and catch-up; no required new topic"
+      ]
+    },
+    {
+      "week": 8,
+      "month": 2,
+      "title": "Search, pointer arrays and callbacks",
+      "bookReading": "5.6–5.12",
+      "bookExercises": [
+        "5-7",
+        "5-10",
+        "5-13"
+      ],
+      "lessons": {
+        "c": [
+          "c-pointers",
+          "c-memory"
+        ],
+        "python": [
+          "binary",
+          "stack"
+        ],
+        "cpp": [
+          "cpp-stl-fast-io",
+          "cpp-stl-fast-io"
+        ]
+      },
+      "problems": [
+        "lc-704",
+        "lc-35",
+        "lc-20",
+        "at-abc085_b"
+      ],
+      "objectives": [
+        "Specify the binary-search interval convention and prove every iteration shrinks it.",
+        "Write a comparison callback without overflowing by subtracting two large integers."
+      ],
+      "project": "Build a sorted word index using pointer arrays. Test missing keys, duplicate keys and an empty index.",
+      "days": [
+        "Read and trace the first concept",
+        "Implement a tiny example and boundary tests",
+        "Attempt two matching problems",
+        "Read the next section and solve exercises",
+        "Practice an unfamiliar variation",
+        "Timed set, then explain every mistake",
+        "Revision and catch-up; no required new topic"
+      ]
+    },
+    {
+      "week": 9,
+      "month": 3,
+      "title": "Structures, lists and queues",
+      "bookReading": "6.1–6.4",
+      "bookExercises": [
+        "6-1",
+        "6-2",
+        "6-3"
+      ],
+      "lessons": {
+        "c": [
+          "c-memory"
+        ],
+        "python": [
+          "stack",
+          "bfs"
+        ],
+        "cpp": [
+          "cpp-stl-fast-io"
+        ]
+      },
+      "problems": [
+        "lc-206",
+        "lc-21",
+        "lc-232",
+        "cf-266-B"
+      ],
+      "objectives": [
+        "Distinguish copying a structure from sharing pointers stored inside it.",
+        "Maintain explicit head/tail invariants and state who owns each node."
+      ],
+      "project": "Implement a linked queue with enqueue, dequeue and destroy. Exercise empty-to-nonempty and one-to-empty transitions.",
+      "days": [
+        "Read and trace the first concept",
+        "Implement a tiny example and boundary tests",
+        "Attempt two matching problems",
+        "Read the next section and solve exercises",
+        "Practice an unfamiliar variation",
+        "Timed set, then explain every mistake",
+        "Revision and catch-up; no required new topic"
+      ]
+    },
+    {
+      "week": 10,
+      "month": 3,
+      "title": "Trees, tables and traversal",
+      "bookReading": "6.5–6.9",
+      "bookExercises": [
+        "6-4",
+        "6-5",
+        "6-6"
+      ],
+      "lessons": {
+        "c": [
+          "c-memory"
+        ],
+        "python": [
+          "dfs",
+          "bfs"
+        ],
+        "cpp": [
+          "graph-dfs",
+          "graph-bfs"
+        ]
+      },
+      "problems": [
+        "lc-104",
+        "lc-226",
+        "lc-200",
+        "lc-733"
+      ],
+      "objectives": [
+        "Track visited nodes to prevent revisiting graph cycles.",
+        "Explain why each node is freed exactly once during tree destruction."
+      ],
+      "project": "Build a word-frequency search tree. Traverse it in order and release every allocation; compare with a small sorted list.",
+      "days": [
+        "Read and trace the first concept",
+        "Implement a tiny example and boundary tests",
+        "Attempt two matching problems",
+        "Read the next section and solve exercises",
+        "Practice an unfamiliar variation",
+        "Timed set, then explain every mistake",
+        "Revision and catch-up; no required new topic"
+      ]
+    },
+    {
+      "week": 11,
+      "month": 3,
+      "title": "Formatted I/O and dynamic programming",
+      "bookReading": "7.1–7.4",
+      "bookExercises": [
+        "7-1",
+        "7-2",
+        "7-3"
+      ],
+      "lessons": {
+        "c": [
+          "c-io",
+          "c-arrays"
+        ],
+        "python": [
+          "dp"
+        ],
+        "cpp": [
+          "dp-foundations"
+        ]
+      },
+      "problems": [
+        "at-dp_a",
+        "at-dp_b",
+        "lc-70",
+        "lc-198"
+      ],
+      "objectives": [
+        "Check every input conversion and match format specifiers to argument types.",
+        "For DP, name the state, base case, transition and evaluation order."
+      ],
+      "project": "Solve a small minimum-cost path over an array. Print the DP table while debugging, then remove diagnostic output.",
+      "days": [
+        "Read and trace the first concept",
+        "Implement a tiny example and boundary tests",
+        "Attempt two matching problems",
+        "Read the next section and solve exercises",
+        "Practice an unfamiliar variation",
+        "Timed set, then explain every mistake",
+        "Revision and catch-up; no required new topic"
+      ]
+    },
+    {
+      "week": 12,
+      "month": 3,
+      "title": "Files, errors and DP variations",
+      "bookReading": "7.5–7.8",
+      "bookExercises": [
+        "7-6",
+        "7-7",
+        "7-9"
+      ],
+      "lessons": {
+        "c": [
+          "c-io",
+          "c-memory"
+        ],
+        "python": [
+          "dp",
+          "heap"
+        ],
+        "cpp": [
+          "knapsack"
+        ]
+      },
+      "problems": [
+        "at-dp_c",
+        "at-dp_d",
+        "lc-322",
+        "lc-215"
+      ],
+      "objectives": [
+        "Check fopen and allocation failures; close each successfully opened file.",
+        "Validate a DP transition against exhaustive search on tiny inputs."
+      ],
+      "project": "Write a line comparison utility with useful stderr messages. Treat files as local sandbox fixtures; no network access is required.",
+      "days": [
+        "Read and trace the first concept",
+        "Implement a tiny example and boundary tests",
+        "Attempt two matching problems",
+        "Read the next section and solve exercises",
+        "Practice an unfamiliar variation",
+        "Timed set, then explain every mistake",
+        "Revision and catch-up; no required new topic"
+      ]
+    },
+    {
+      "week": 13,
+      "month": 4,
+      "title": "System interfaces and graph paths",
+      "bookReading": "8.1–8.4",
+      "bookExercises": [
+        "8-1"
+      ],
+      "lessons": {
+        "c": [
+          "c-io"
+        ],
+        "python": [
+          "bfs",
+          "dfs"
+        ],
+        "cpp": [
+          "dijkstra",
+          "dsu"
+        ]
+      },
+      "problems": [
+        "lc-994",
+        "lc-1971",
+        "cf-520-B"
+      ],
+      "objectives": [
+        "Distinguish a file descriptor from a stdio stream and handle partial reads/writes.",
+        "Choose BFS for unit-weight edges; justify any weighted-path algorithm separately."
+      ],
+      "project": "Study the UNIX calls on paper, then implement a portable stdio copy utility. POSIX-specific exercises require a compatible runtime.",
+      "days": [
+        "Read and trace the first concept",
+        "Implement a tiny example and boundary tests",
+        "Attempt two matching problems",
+        "Read the next section and solve exercises",
+        "Practice an unfamiliar variation",
+        "Timed set, then explain every mistake",
+        "Revision and catch-up; no required new topic"
+      ]
+    },
+    {
+      "week": 14,
+      "month": 4,
+      "title": "Allocation, invariants and greedy choices",
+      "bookReading": "8.5–8.7",
+      "bookExercises": [
+        "8-2",
+        "8-6",
+        "8-7"
+      ],
+      "lessons": {
+        "c": [
+          "c-memory"
+        ],
+        "python": [
+          "greedy",
+          "heap"
+        ],
+        "cpp": [
+          "dsu",
+          "cpp-stl-fast-io"
+        ]
+      },
+      "problems": [
+        "lc-55",
+        "lc-121",
+        "at-dp_e"
+      ],
+      "objectives": [
+        "Reason about alignment, block ownership and fragmentation before an allocator implementation.",
+        "Try to disprove a greedy choice with the smallest counterexample you can construct."
+      ],
+      "project": "Trace a toy free-list allocator on paper. Keep custom allocation experiments small and separate from contest solutions.",
+      "days": [
+        "Read and trace the first concept",
+        "Implement a tiny example and boundary tests",
+        "Attempt two matching problems",
+        "Read the next section and solve exercises",
+        "Practice an unfamiliar variation",
+        "Timed set, then explain every mistake",
+        "Revision and catch-up; no required new topic"
+      ]
+    },
+    {
+      "week": 15,
+      "month": 4,
+      "title": "Mixed sets and deliberate repair",
+      "bookReading": "Appendix A; revisit the chapters behind your mistakes",
+      "bookExercises": [],
+      "lessons": {
+        "c": [
+          "c-arrays",
+          "c-pointers",
+          "c-memory"
+        ],
+        "python": [
+          "contest"
+        ],
+        "cpp": [
+          "cpp-stl-fast-io"
+        ]
+      },
+      "problems": [
+        "lc-3",
+        "lc-347",
+        "lc-102",
+        "at-dp_f"
+      ],
+      "objectives": [
+        "Explain correctness and complexity before looking at a saved solution.",
+        "Classify each failure as modeling, implementation, boundary, time or recall."
+      ],
+      "project": "Run two 60-minute mixed sets on separate days. Reserve a complete session after each for upsolving and test-case design.",
+      "days": [
+        "Read and trace the first concept",
+        "Implement a tiny example and boundary tests",
+        "Attempt two matching problems",
+        "Read the next section and solve exercises",
+        "Practice an unfamiliar variation",
+        "Timed set, then explain every mistake",
+        "Revision and catch-up; no required new topic"
+      ]
+    },
+    {
+      "week": 16,
+      "month": 4,
+      "title": "Independent re-solves and a capstone",
+      "bookReading": "Appendix B; Chapters 1–8 review",
+      "bookExercises": [],
+      "lessons": {
+        "c": [
+          "c-io",
+          "c-memory"
+        ],
+        "python": [
+          "contest"
+        ],
+        "cpp": [
+          "cpp-stl-fast-io"
+        ]
+      },
+      "problems": [
+        "lc-53",
+        "lc-56",
+        "lc-739"
+      ],
+      "objectives": [
+        "Reproduce old solutions after a delay, with no notes or video.",
+        "Keep only genuinely independent, understood solutions in your mastery evidence."
+      ],
+      "project": "Build a small text indexer or contest toolkit. Document its input contract, tests, ownership rules and complexity; finish with a 90-minute mixed rehearsal.",
+      "days": [
+        "Read and trace the first concept",
+        "Implement a tiny example and boundary tests",
+        "Attempt two matching problems",
+        "Read the next section and solve exercises",
+        "Practice an unfamiliar variation",
+        "Timed set, then explain every mistake",
+        "Revision and catch-up; no required new topic"
+      ]
+    }
+  ],
+  "calendarNote": "Each calendar month has four study blocks. The final block of each month absorbs extra days, revision and rest. Dates never automatically complete a topic."
+}

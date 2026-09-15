@@ -67,7 +67,7 @@ try{
   const references=JSON.parse(await readFile(resolve(root,'content/lesson-references.json'),'utf8')).lessons;
   assert.equal(Object.keys(references).length,115);
   await route('#learn/hello','.lesson-sources');assert(await evaluate('document.querySelector(".lesson-sources a").href.startsWith("https://docs.python.org/")'));
-  await route('#native/c-start','.lesson-sources');assert(await evaluate('document.querySelector(".lesson-sources a").href.includes("beej.us")'));
+  await route('#native/c-start','.lesson-sources');assert(await evaluate('document.querySelector(".lesson-sources a").href.includes("#curriculum")'));
   await route('#native/cpp-start','.lesson-sources');assert(await evaluate('document.querySelector(".lesson-sources a").href.includes("learncpp.com")'));
   await route('#roadmap','.plan-metrics');
   assert(await evaluate('state.study.end===ForgeCatalogCore.addMonths(state.study.start,4)'));
@@ -75,6 +75,38 @@ try{
   await send('Emulation.setDeviceMetricsOverride',{width:375,height:812,deviceScaleFactor:1,mobile:true});
   for(const [hash,selector] of [['#practice','.problem-row'],['#problem/lc-1','#problem-code'],['#roadmap','.plan-metrics']]){await route(hash,selector);const widths=await evaluate('({content:document.documentElement.scrollWidth,viewport:innerWidth})');assert(widths.content<=376,hash+' overflows the 375px mobile viewport: '+JSON.stringify(widths));}
   await screenshot('plan-mobile');
+  // New curriculum, real browser JavaScript, Python traces and repair persistence.
+  await route('#curriculum','.study-week');
+  assert.equal(await evaluate('document.querySelectorAll(".study-week").length'),16);
+  await screenshot('curriculum-mobile');
+  await send('Emulation.setDeviceMetricsOverride',{width:1440,height:1000,deviceScaleFactor:1,mobile:false});
+  await route('#problem/lc-1','#problem-code');
+  await evaluate('ForgeStudy.language("lc-1","javascript");ForgeStudy.update("lc-1","code","console.log(Number(readline()) + 2)");ForgeStudy.update("lc-1","stdin","5");ForgeStudy.update("lc-1","expected","7");ForgeStudy.run("lc-1")');
+  await until('document.querySelector("#problem-output").textContent.includes("output matches")',20000);
+  await evaluate('ForgeLearning.addTest("lc-1");ForgeStudy.update("lc-1","expected","8");ForgeLearning.addTest("lc-1");ForgeLearning.runSuite("lc-1")');
+  await until('document.querySelector("#suite-result").textContent.includes("Test 2: FAIL")',30000);
+  assert(await evaluate('state.study.workspaces["lc-1"].review.reasons.includes("wrong")'));
+  // Infinite JS runs in a worker and can be stopped without freezing the page.
+  await evaluate('ForgeStudy.update("lc-1","code","while(true){}");void ForgeStudy.run("lc-1")');
+  await evaluate('ForgeStudy.stop()');
+  assert(await evaluate('document.querySelector("#problem-output").textContent.includes("stopped")'));
+  await evaluate('state.study.workspaces["lc-1"].timer={deadline:Date.now()-1000,fired:false};ForgeWorkspaceStorage.touch("lc-1");save()');
+  await evaluate('ForgeLearning.tick()');
+  assert(await evaluate('state.study.workspaces["lc-1"].review.reasons.includes("time")'));
+  await evaluate('ForgeLearning.traceDemo("at-dp_a")');
+  await until('document.querySelectorAll(".trace-line.active").length===1',45000);
+  assert(await evaluate('document.querySelector("#trace-body").textContent.includes("15")'));
+  await evaluate('ForgeLearning.seek(8)');
+  await screenshot('python-trace-desktop');
+  await evaluate('closeModal()');
+  await send('Page.reload',{ignoreCache:true});
+  await until('typeof ForgeLearning!=="undefined" && ForgeStudy.allProblems().length>20000');await evaluate('ForgeWorkspaceStorage.ready');
+  assert.equal(await evaluate('state.study.workspaces["lc-1"].tests.length'),2);
+  assert(await evaluate('state.study.workspaces["lc-1"].review.reasons.includes("time")'));
+  await route('#review','.revision-panel');
+  await evaluate('state.study.workspaces["lc-1"].review.due=Date.now()-1;render()');
+  assert(await evaluate('document.querySelector(".revision-panel").textContent.includes("Two Sum")'));
+  await screenshot('revision-desktop');
   // Portable backup includes IndexedDB drafts; importing and resetting use fresh generations.
   await evaluate('window.savedBackup=null;download=(name,text)=>{window.savedBackup=JSON.parse(text)};exportData()');
   assert(await evaluate('savedBackup.study.workspaces["lc-1"].notes.includes("earlier values")'));
@@ -88,7 +120,7 @@ try{
   assert.equal(await evaluate('Object.keys(state.study.workspaces).length'),0,'old drafts must not reappear after reset');
   assert.equal(await evaluate('state.cards.length'),0);
   // Third-party frames can have their own errors. Record any exceptions for diagnosis.
-  const report={result:'PASS',counts,references:115,checks:['catalog search/pagination','embedded editorial/video','IndexedDB reload','legacy progress','guided attempts and recall','Python execution/error','four-month dates','mobile layout','backup/import/reset'],runtimeErrors};
+  const report={result:'PASS',counts,references:115,checks:['catalog search/pagination','embedded editorial/video','IndexedDB reload','legacy progress','guided attempts and recall','Python execution/error','four-month dates','mobile layout','backup/import/reset','16-block curriculum','JavaScript worker and cancellation','saved suites and wrong-answer revision','timer persistence','Python trace playback'],runtimeErrors};
   await writeFile(resolve(root,'test-results/browser-report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));
 }catch(error){let page='';try{await screenshot('failure');page=await evaluate('document.querySelector("#app")?.innerText.slice(0,6000)');console.error('PAGE:',page);}catch{}await mkdir(resolve(root,'test-results'),{recursive:true});await writeFile(resolve(root,'test-results/browser-report.json'),JSON.stringify({result:'FAIL',error:error.message,stack:error.stack,page,runtimeErrors},null,2));throw error;}
 finally{ws?.close();chrome.kill('SIGTERM');server.closeAllConnections();server.close();await rm(profile,{recursive:true,force:true,maxRetries:5,retryDelay:100});}

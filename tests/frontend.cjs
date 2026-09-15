@@ -72,6 +72,19 @@ const h=run(String.raw`ForgeNative.highlight('<script>alert("x")</script>\nint x
 for(const lesson of JSON.parse(native).modules.flatMap(m=>m.lessons)){action(`location.hash='#native/${lesson.id}';render()`);assert(el('#app').innerHTML.includes(lesson.title.replaceAll('&','&amp;')),lesson.id);}
 for(const track of ['c','cpp','atlas'])action(`location.hash='#native/${track}';render()`);
 action(`location.hash='#lab';ForgeNative.changeLanguage('cpp');render()`);assert(el('#app').innerHTML.includes('Connect compiler service'));assert(el('#app').innerHTML.includes('native-highlight'));
+// Four-month integration: failures, timers, persisted queues and confidence affect recommendations.
+action(`ForgeStudy.acceptCatalog(JSON.parse(${JSON.stringify(fs.readFileSync(root+'/content/catalog/leetcode.json','utf8'))}));location.hash='#problem/lc-1';render()`);
+assert(el('#app').innerHTML.includes('Attempt, test, understand'));
+action(`ForgeLearning.unclear('lc-1');state.study.workspaces['lc-1'].review.due=Date.now()-1;state.study.attempts.push({pid:'lc-1',platform:'LeetCode',outcome:'independent',minutes:15,note:'',at:1,difficulty:'Easy',rating:null});state.checkins[today()]={minutes:180,energy:'steady'};`);
+assert(run(`ForgeStudy.dailyTasks().some(x=>x.problem.id==='lc-1'&&x.reason.includes('re-solve'))`),'previously solved problems must return for revision');
+action(`state.study.workspaces['lc-1'].timer={deadline:Date.now()-1,fired:false};ForgeLearning.tick()`);
+assert(run(`state.study.workspaces['lc-1'].timer.fired`));assert(run(`state.study.workspaces['lc-1'].review.reasons.includes('time')`));
+action(`ForgeStudy.log({preventDefault(){},target:{outcome:'independent',minutes:'20',confidence:'partial',note:'Cannot explain the invariant'}},'lc-1')`);
+equal(`state.study.attempts.at(-1).outcome`,'hinted');
+action(`ForgeLearning.loadDemo('lc-1')`);equal(`state.study.workspaces['lc-1'].tests.length`,2);
+equal(`validate(JSON.parse(JSON.stringify(state))).study.workspaces['lc-1'].tests.length`,2);
+action(`location.hash='#curriculum';render()`);assert(el('#app').innerHTML.includes('Kernighan'));assert(el('#app').innerHTML.includes('BLOCK 16'));
+action(`location.hash='#lab';ForgeNative.changeLanguage('cpp');render()`);
 // Compiled lesson renders all Markdown sections, tables and code safely.
 assert(article.includes('<table>'));assert(article.includes('Scoreboard Thresholds'));assert(article.includes('&lt;iostream&gt;'));
 (async()=>{

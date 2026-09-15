@@ -67,3 +67,16 @@ test('provider outages and queue deadlines are not mislabeled as algorithm time 
   const r=await f.request('/v1/submissions',post());assert.equal((await terminal(f,r.body.id)).status,'service_timeout');
   const bad=await fixture(t,{judge:{...judge,submit:async()=>{throw Error('private token must not leak');}}});const b=await bad.request('/v1/submissions',post());const result=await terminal(bad,b.body.id);assert.equal(result.status,'service_error');assert(!JSON.stringify(result).includes('private token'));
 });
+test('installed language discovery excludes executable uploads and preserves the fixed sandbox policy',async()=>{
+  const config=configFromEnv({...env,JUDGE0_EXTRA_LANGUAGE_IDS:'all'});
+  const names=[{id:50,name:'C (GCC 12)'},{id:54,name:'C++ (GCC 12)'},{id:71,name:'Python (3.11)'},{id:62,name:'Java (OpenJDK 13)'},{id:44,name:'Executable'},{id:89,name:'Multi-file program'}];
+  const provider=createJudge0(config,async url=>Response.json(url.endsWith('/languages')?names:limits));
+  assert.equal((await provider.check()).length,4);
+  assert.equal(config.languageIds['judge0-62'],62);assert(!Object.hasOwn(config.languageIds,'judge0-44'));
+  const data=validateSubmission({language:'judge0-62',source:'class Main {}',stdin:''},config.languageIds);
+  const payload=providerPayload(data,config.languageIds);assert.equal(payload.language_id,62);assert(!Object.hasOwn(payload,'compiler_options'));assert.equal(payload.enable_network,false);assert.equal(payload.memory_limit,POLICY.memoryKb);
+  assert.throws(()=>validateSubmission({language:'judge0-99',source:'x'},config.languageIds));
+  assert.throws(()=>configFromEnv({...env,JUDGE0_EXTRA_LANGUAGE_IDS:'62,0'}));
+  const selected=configFromEnv({...env,JUDGE0_EXTRA_LANGUAGE_IDS:'62,71'});assert.equal(selected.languageIds['judge0-71'],71);
+  await assert.rejects(()=>createJudge0(selected,async url=>Response.json(url.endsWith('/languages')?names.filter(l=>l.id!==71):limits)).check());
+});

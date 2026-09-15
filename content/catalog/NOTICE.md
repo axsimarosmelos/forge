@@ -9,3 +9,7 @@ Forge combines public problem metadata with linked educational resources. Platfo
 - AtCoder metadata and estimated difficulty: [AtCoder Problems datasets](https://github.com/kenkoooo/AtCoderProblems/blob/main/doc/api.md), an unofficial community service. Its starter bootcamp list and code are [MIT licensed](../../licenses/atcoder-problems-MIT.txt). Difficulty estimates are not official AtCoder ratings.
 
 No platform cookies, credentials, premium statements or private tests are requested. Progress, personal notes and pasted personal study text remain in your browser/backup. Official judging and contests remain on their original platforms. Catalog refresh errors preserve the last valid snapshot and appear in manifest.json.
+
+## Additional study material
+
+`../solution-demos.json` contains 19 original Forge Python solutions and test cases, dedicated under CC0-1.0 (https://creativecommons.org/publicdomain/zero/1.0/). They are separate from the Doocs CC-BY-SA content. `../selected-walkthroughs.json` contains YouTube links and selection notes; no videos or transcripts are copied. K&R references identify sections and exercise numbers from the user-supplied second edition; the book is not distributed.

@@ -1,3 +1,19 @@
+# Four-month practice extension
+
+The original C/C++ design below remains the baseline. This extension adds:
+
+- A 16-block curriculum spanning four **calendar** months, with chapter/exercise references to the uploaded K&R second edition. The uploaded PDF is not copied into the public repository. A local PDF picker permits in-page reading without uploading the file.
+- Python trace recording in a disposable Pyodide worker. Only user-file frames are recorded; traces stop growing after 300 events or 1.5 MB. Lists, tuples, dictionaries and sets are bounded; shared object IDs remain visible. Custom objects are summarized by type and identity, without invoking their representation methods. Output is shown as final output, not falsely associated with each earlier trace step. The worker is terminated on cancellation or the execution deadline.
+- JavaScript execution in an opaque-origin sandbox iframe with a dedicated blob worker. CSP denies connections and imports. A ten-second deadline and a Stop button terminate the iframe/worker. This supplies console, print, readline and stdin helpers; it is not a Node.js runtime.
+- Saved test suites, persistent attempt timers and confidence reporting. Wrong output, compilation/runtime errors, expired timeboxes and low confidence schedule problem revision. Infrastructure errors do not count as code errors. Review queues include previously independently solved tasks. Successful delayed re-solves grow spacing through 1, 3, 7, 14 and 30 days. Early repeats cannot advance the interval. State is included in IndexedDB hydration and portable backups.
+- Optional installed-language discovery. `JUDGE0_EXTRA_LANGUAGE_IDS=all` adds provider-advertised single-source runtimes; a comma-separated ID list restricts selection. Executable-upload and multi-file modes are excluded. C/C++ retain fixed flags, other runtimes use provider defaults, and every runtime retains the existing bounded resource policy. A submitted language must be in the server-selected map. No browser-supplied language ID can bypass this map.
+
+The gateway must still be deployed and connected for native execution. The discovery mechanism does not establish that every runtime works within the existing memory/process limits: verify the selected Java/Go/etc. runtime on the real provider. Python/JavaScript work in the browser without this gateway. SQL tasks need a compatible SQL runtime plus schema and fixture data. Local tests are not official hidden-test submissions.
+
+The new Python trace viewer is built into Forge. C, C++, Java and JavaScript use the existing Python Tutor embedding when requested; other runtimes currently have execution but no step visualizer. The 19 original Python solutions are executable demonstrations, not coverage of all 24,988 indexed problems. Existing licensed solutions can be loaded into supported editors and need a suitable test driver.
+
+The sections below describe the original gateway and curriculum for reference; runtime availability and curriculum behavior above supersede the earlier C/C++-only and short-plan descriptions.
+
 # Forge v2: C/C++ execution and curriculum
 
 ## 1. Execution architecture
