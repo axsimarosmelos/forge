@@ -85,6 +85,7 @@ try{
   assert.equal(await evaluate('Object.keys(state.study.workspaces).length'),0,'old drafts must not reappear after reset');
   assert.equal(await evaluate('state.cards.length'),0);
   // Third-party frames can have their own errors. Record any exceptions for diagnosis.
-  console.log(JSON.stringify({result:'PASS',counts,references:115,checks:['catalog search/pagination','embedded editorial/video','IndexedDB reload','legacy progress','guided attempts and recall','Python execution/error','four-month dates','mobile layout','backup/import/reset'],runtimeErrors},null,2));
-}catch(error){try{await screenshot('failure');console.error('PAGE:',await evaluate('document.querySelector("#app")?.innerText.slice(0,6000)'));}catch{}throw error;}
+  const report={result:'PASS',counts,references:115,checks:['catalog search/pagination','embedded editorial/video','IndexedDB reload','legacy progress','guided attempts and recall','Python execution/error','four-month dates','mobile layout','backup/import/reset'],runtimeErrors};
+  await writeFile(resolve(root,'test-results/browser-report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));
+}catch(error){let page='';try{await screenshot('failure');page=await evaluate('document.querySelector("#app")?.innerText.slice(0,6000)');console.error('PAGE:',page);}catch{}await mkdir(resolve(root,'test-results'),{recursive:true});await writeFile(resolve(root,'test-results/browser-report.json'),JSON.stringify({result:'FAIL',error:error.message,stack:error.stack,page,runtimeErrors},null,2));throw error;}
 finally{ws?.close();chrome.kill('SIGTERM');server.closeAllConnections();server.close();await rm(profile,{recursive:true,force:true,maxRetries:5,retryDelay:100});}

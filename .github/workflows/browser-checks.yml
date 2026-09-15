@@ -10,6 +10,7 @@ on:
       - .github/workflows/browser-checks.yml
 permissions:
   contents: read
+  checks: write
 concurrency:
   group: forge-browser-checks
   cancel-in-progress: true
@@ -29,6 +30,20 @@ jobs:
           python3 tests/catalog_sources.py
       - name: Test the built site in a real browser
         run: node tests/browser-smoke.mjs
+      - name: Publish browser test report
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('node:fs');
+            const file = 'test-results/browser-report.json';
+            const report = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file, 'utf8')) : {result: 'FAIL', error: 'Browser test did not produce a report.'};
+            await github.rest.checks.create({
+              owner: context.repo.owner, repo: context.repo.repo,
+              name: 'Forge browser report', head_sha: context.sha,
+              status: 'completed', conclusion: report.result === 'PASS' ? 'success' : 'failure',
+              output: {title: 'Browser: ' + report.result, summary: '```json\n' + JSON.stringify(report, null, 2) + '\n```'}
+            });
       - name: Save browser screenshots
         if: always()
         uses: actions/upload-artifact@v4
