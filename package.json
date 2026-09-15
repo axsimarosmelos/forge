@@ -1,0 +1,13 @@
+{
+  "name": "forge-learning-studio",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "build": "python3 scripts/generate_curriculum.py && node scripts/build.mjs",
+    "test": "node --test tests/backend.test.mjs && node tests/frontend.cjs && python3 tests/curriculum.py",
+    "start:api": "node --env-file=backend/.env backend/server.mjs"
+  },
+  "devDependencies": { "marked": "17.0.5" }
+}
