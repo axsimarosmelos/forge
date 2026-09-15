@@ -1,23 +1,23 @@
 {
-  "updatedAt": "2026-09-15T09:46:57.620598+00:00",
+  "updatedAt": "2026-09-15T10:16:16.078277+00:00",
   "catalogs": {
     "leetcode": {
       "count": 4055,
-      "fetchedAt": "2026-09-15T09:46:57.620598+00:00",
+      "fetchedAt": "2026-09-15T10:16:16.078277+00:00",
       "coverage": "Community index snapshot. New, premium and retired problems may differ from the live platform. Official statements/tests are not mirrored.",
       "videos": 449,
-      "editorials": 4055
+      "editorials": 4052
     },
     "atcoder": {
       "count": 9532,
-      "fetchedAt": "2026-09-15T09:46:57.620598+00:00",
+      "fetchedAt": "2026-09-15T10:16:16.078277+00:00",
       "coverage": "AtCoder Problems public dataset at refresh time; community coverage and estimated difficulties, not an official complete archive guarantee.",
       "videos": 0,
       "editorials": 0
     },
     "codeforces": {
       "count": 11401,
-      "fetchedAt": "2026-09-15T09:46:57.620598+00:00",
+      "fetchedAt": "2026-09-15T10:16:16.078277+00:00",
       "coverage": "Full public problemset.problems response at refresh time. Gym/private tasks and future additions are outside this snapshot.",
       "videos": 0,
       "editorials": 0
