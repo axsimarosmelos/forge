@@ -62,7 +62,7 @@ try{
   // Actual browser Python worker, including stdout and a deliberate runtime failure.
   await evaluate('ForgeStudy.run("lc-1")');
   assert(await evaluate('document.querySelector("#problem-output").textContent.includes("Your chosen test output matches.")'),'Python execution must produce expected output');
-  await evaluate('ForgeStudy.update("lc-1","code","raise ValueError(\"expected test failure\")");ForgeStudy.run("lc-1")');
+  await evaluate('ForgeStudy.update("lc-1","code","raise ValueError(123)");ForgeStudy.run("lc-1")');
   await until('document.querySelector("#problem-output").textContent.includes("runtime_error")',60000);
   const references=JSON.parse(await readFile(resolve(root,'content/lesson-references.json'),'utf8')).lessons;
   assert.equal(Object.keys(references).length,115);
