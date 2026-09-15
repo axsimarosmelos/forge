@@ -28,7 +28,7 @@ def _forge_value(value, depth=0, seen=None):
 def _forge_trace(frame, event, arg):
     global _forge_overflow, _forge_total
     if frame.f_code.co_filename != '<forge-user>': return None
-    if event not in ('line','call','return','exception'): return _forge_trace
+    if event not in ('line','call','return','exception') or frame.f_lineno < 1: return _forge_trace
     if len(_forge_steps) >= 300: _forge_overflow=True; return None
     frames=[]; current=frame
     while current and len(frames)<8:
