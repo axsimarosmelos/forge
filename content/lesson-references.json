@@ -1,0 +1,963 @@
+{
+  "version": 1,
+  "reviewedAt": "2026-09-15",
+  "selection": "Topic match, beginner clarity, original authors and maintained documentation; these are curated recommendations rather than an objective universal ranking.",
+  "lessons": {
+    "hello": [
+      {
+        "title": "Numbers and variables",
+        "url": "https://docs.python.org/3/tutorial/introduction.html#numbers",
+        "why": "Read the exact language operation used in this lesson, then trace the Forge example.",
+        "publisher": "Python documentation"
+      }
+    ],
+    "input": [
+      {
+        "title": "input() and integer conversion",
+        "url": "https://docs.python.org/3/library/functions.html#input",
+        "why": "Read the exact language operation used in this lesson, then trace the Forge example.",
+        "publisher": "Python documentation"
+      }
+    ],
+    "if": [
+      {
+        "title": "if statements",
+        "url": "https://docs.python.org/3/tutorial/controlflow.html#if-statements",
+        "why": "Read the exact language operation used in this lesson, then trace the Forge example.",
+        "publisher": "Python documentation"
+      }
+    ],
+    "loops": [
+      {
+        "title": "for loops and range()",
+        "url": "https://docs.python.org/3/tutorial/controlflow.html#for-statements",
+        "why": "Read the exact language operation used in this lesson, then trace the Forge example.",
+        "publisher": "Python documentation"
+      }
+    ],
+    "lists": [
+      {
+        "title": "Lists and their operations",
+        "url": "https://docs.python.org/3/tutorial/datastructures.html#more-on-lists",
+        "why": "Read the exact language operation used in this lesson, then trace the Forge example.",
+        "publisher": "Python documentation"
+      }
+    ],
+    "strings": [
+      {
+        "title": "Strings and indexing",
+        "url": "https://docs.python.org/3/tutorial/introduction.html#text",
+        "why": "Read the exact language operation used in this lesson, then trace the Forge example.",
+        "publisher": "Python documentation"
+      }
+    ],
+    "functions": [
+      {
+        "title": "Defining functions",
+        "url": "https://docs.python.org/3/tutorial/controlflow.html#defining-functions",
+        "why": "Read the exact language operation used in this lesson, then trace the Forge example.",
+        "publisher": "Python documentation"
+      }
+    ],
+    "counting": [
+      {
+        "title": "Dictionaries",
+        "url": "https://docs.python.org/3/tutorial/datastructures.html#dictionaries",
+        "why": "Read the exact language operation used in this lesson, then trace the Forge example.",
+        "publisher": "Python documentation"
+      }
+    ],
+    "sorting": [
+      {
+        "title": "Sorting HOWTO",
+        "url": "https://docs.python.org/3/howto/sorting.html",
+        "why": "Read the exact language operation used in this lesson, then trace the Forge example.",
+        "publisher": "Python documentation"
+      }
+    ],
+    "math": [
+      {
+        "title": "Integer arithmetic operators",
+        "url": "https://docs.python.org/3/reference/expressions.html#binary-arithmetic-operations",
+        "why": "Read the exact language operation used in this lesson, then trace the Forge example.",
+        "publisher": "Python documentation"
+      }
+    ],
+    "binary": [
+      {
+        "title": "bisect: sorted-array search",
+        "url": "https://docs.python.org/3/library/bisect.html",
+        "why": "Read the exact language operation used in this lesson, then trace the Forge example.",
+        "publisher": "Python documentation"
+      }
+    ],
+    "stack": [
+      {
+        "title": "Using lists as stacks",
+        "url": "https://docs.python.org/3/tutorial/datastructures.html#using-lists-as-stacks",
+        "why": "Read the exact language operation used in this lesson, then trace the Forge example.",
+        "publisher": "Python documentation"
+      }
+    ],
+    "recursion": [
+      {
+        "title": "Function definitions and calls",
+        "url": "https://docs.python.org/3/tutorial/controlflow.html#defining-functions",
+        "why": "Read the exact language operation used in this lesson, then trace the Forge example.",
+        "publisher": "Python documentation"
+      },
+      {
+        "title": "Recursion",
+        "url": "https://usaco.guide/bronze/complete-rec",
+        "why": "Follow a complete call tree and identify the base case.",
+        "publisher": "USACO Guide"
+      }
+    ],
+    "heap": [
+      {
+        "title": "heapq: priority queues",
+        "url": "https://docs.python.org/3/library/heapq.html",
+        "why": "Read the exact language operation used in this lesson, then trace the Forge example.",
+        "publisher": "Python documentation"
+      }
+    ],
+    "complexity": [
+      {
+        "title": "Time complexity and constraints",
+        "url": "https://usaco.guide/general/time-complexity",
+        "why": "Focus on the invariant and complexity. Some reference examples use C++; Forge supplies the Python lesson.",
+        "publisher": "USACO Guide"
+      }
+    ],
+    "brute": [
+      {
+        "title": "Complete search",
+        "url": "https://usaco.guide/bronze/intro-complete",
+        "why": "Focus on the invariant and complexity. Some reference examples use C++; Forge supplies the Python lesson.",
+        "publisher": "USACO Guide"
+      }
+    ],
+    "prefix": [
+      {
+        "title": "Prefix sums",
+        "url": "https://usaco.guide/silver/prefix-sums",
+        "why": "Focus on the invariant and complexity. Some reference examples use C++; Forge supplies the Python lesson.",
+        "publisher": "USACO Guide"
+      }
+    ],
+    "twopointers": [
+      {
+        "title": "Two pointers",
+        "url": "https://usaco.guide/silver/two-pointers",
+        "why": "Focus on the invariant and complexity. Some reference examples use C++; Forge supplies the Python lesson.",
+        "publisher": "USACO Guide"
+      }
+    ],
+    "greedy": [
+      {
+        "title": "Introduction to greedy algorithms",
+        "url": "https://usaco.guide/bronze/intro-greedy",
+        "why": "Focus on the invariant and complexity. Some reference examples use C++; Forge supplies the Python lesson.",
+        "publisher": "USACO Guide"
+      }
+    ],
+    "window": [
+      {
+        "title": "Sliding-window and two-pointer reasoning",
+        "url": "https://usaco.guide/silver/two-pointers",
+        "why": "Focus on the invariant and complexity. Some reference examples use C++; Forge supplies the Python lesson.",
+        "publisher": "USACO Guide"
+      }
+    ],
+    "bfs": [
+      {
+        "title": "Breadth-first search",
+        "url": "https://cp-algorithms.com/graph/breadth-first-search.html",
+        "why": "Focus on the invariant and complexity. Some reference examples use C++; Forge supplies the Python lesson.",
+        "publisher": "cp-algorithms"
+      },
+      {
+        "title": "collections.deque for a FIFO queue",
+        "url": "https://docs.python.org/3/library/collections.html#collections.deque",
+        "why": "Use append and popleft to implement the queue in Python.",
+        "publisher": "Python documentation"
+      }
+    ],
+    "dfs": [
+      {
+        "title": "Depth-first search",
+        "url": "https://cp-algorithms.com/graph/depth-first-search.html",
+        "why": "Focus on the invariant and complexity. Some reference examples use C++; Forge supplies the Python lesson.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "dp": [
+      {
+        "title": "Introduction to dynamic programming",
+        "url": "https://cp-algorithms.com/dynamic_programming/intro-to-dp.html",
+        "why": "Focus on the invariant and complexity. Some reference examples use C++; Forge supplies the Python lesson.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "contest": [
+      {
+        "title": "How to practice effectively",
+        "url": "https://usaco.guide/general/practicing",
+        "why": "Focus on the invariant and complexity. Some reference examples use C++; Forge supplies the Python lesson.",
+        "publisher": "USACO Guide"
+      }
+    ],
+    "c-start": [
+      {
+        "title": "Hello, World and compilation",
+        "url": "https://beej.us/guide/bgc/html/split/hello-world.html",
+        "why": "A focused, beginner-oriented chapter from the author of Beej’s Guide to C.",
+        "publisher": "Beej’s Guide to C"
+      }
+    ],
+    "c-io": [
+      {
+        "title": "Formatted input and output",
+        "url": "https://beej.us/guide/bgc/html/split/file-inputoutput.html",
+        "why": "A focused, beginner-oriented chapter from the author of Beej’s Guide to C.",
+        "publisher": "Beej’s Guide to C"
+      }
+    ],
+    "c-control": [
+      {
+        "title": "Variables, operators and flow control",
+        "url": "https://beej.us/guide/bgc/html/split/variables-and-statements.html",
+        "why": "A focused, beginner-oriented chapter from the author of Beej’s Guide to C.",
+        "publisher": "Beej’s Guide to C"
+      }
+    ],
+    "c-arrays": [
+      {
+        "title": "Arrays, bounds and pointers",
+        "url": "https://beej.us/guide/bgc/html/split/arrays.html",
+        "why": "A focused, beginner-oriented chapter from the author of Beej’s Guide to C.",
+        "publisher": "Beej’s Guide to C"
+      },
+      {
+        "title": "Null-terminated strings",
+        "url": "https://beej.us/guide/bgc/html/split/strings.html",
+        "why": "Connect the final zero byte to array capacity and safe input.",
+        "publisher": "Beej’s Guide to C"
+      }
+    ],
+    "c-pointers": [
+      {
+        "title": "Pointers and dereferencing",
+        "url": "https://beej.us/guide/bgc/html/split/pointers.html",
+        "why": "A focused, beginner-oriented chapter from the author of Beej’s Guide to C.",
+        "publisher": "Beej’s Guide to C"
+      }
+    ],
+    "c-memory": [
+      {
+        "title": "Manual memory allocation",
+        "url": "https://beej.us/guide/bgc/html/split/manual-memory-allocation.html",
+        "why": "A focused, beginner-oriented chapter from the author of Beej’s Guide to C.",
+        "publisher": "Beej’s Guide to C"
+      }
+    ],
+    "cpp-start": [
+      {
+        "title": "Statements and program structure",
+        "url": "https://www.learncpp.com/cpp-tutorial/statements-and-the-structure-of-a-program/",
+        "why": "Step-by-step C++ instruction with small examples and common mistakes.",
+        "publisher": "LearnCpp"
+      }
+    ],
+    "cpp-io": [
+      {
+        "title": "cin, cout and endl",
+        "url": "https://www.learncpp.com/cpp-tutorial/introduction-to-iostream-cout-cin-and-endl/",
+        "why": "Step-by-step C++ instruction with small examples and common mistakes.",
+        "publisher": "LearnCpp"
+      }
+    ],
+    "cpp-control": [
+      {
+        "title": "for statements",
+        "url": "https://www.learncpp.com/cpp-tutorial/for-statements/",
+        "why": "Step-by-step C++ instruction with small examples and common mistakes.",
+        "publisher": "LearnCpp"
+      }
+    ],
+    "cpp-functions": [
+      {
+        "title": "Pass by lvalue reference",
+        "url": "https://www.learncpp.com/cpp-tutorial/pass-by-lvalue-reference/",
+        "why": "Step-by-step C++ instruction with small examples and common mistakes.",
+        "publisher": "LearnCpp"
+      }
+    ],
+    "cpp-sequences": [
+      {
+        "title": "std::vector and list constructors",
+        "url": "https://www.learncpp.com/cpp-tutorial/introduction-to-stdvector-and-list-constructors/",
+        "why": "Step-by-step C++ instruction with small examples and common mistakes.",
+        "publisher": "LearnCpp"
+      }
+    ],
+    "cpp-costs": [
+      {
+        "title": "Time complexity",
+        "url": "https://usaco.guide/general/time-complexity",
+        "why": "Translate input bounds into a feasible operation count.",
+        "publisher": "USACO Guide"
+      },
+      {
+        "title": "Fixed-width integers and size_t",
+        "url": "https://www.learncpp.com/cpp-tutorial/fixed-width-integers-and-size-t/",
+        "why": "Check ranges and conversions before multiplication.",
+        "publisher": "LearnCpp"
+      }
+    ],
+    "cpp-stl-fast-io": [
+      {
+        "title": "Fast input and output",
+        "url": "https://usaco.guide/general/input-output",
+        "why": "Contest input patterns, stream synchronization and flushing.",
+        "publisher": "USACO Guide"
+      },
+      {
+        "title": "Introduction to standard library algorithms",
+        "url": "https://www.learncpp.com/cpp-tutorial/introduction-to-standard-library-algorithms/",
+        "why": "Connect iterators to sort, find and standard containers.",
+        "publisher": "LearnCpp"
+      },
+      {
+        "title": "Standard stream synchronization",
+        "url": "https://eel.is/c++draft/ios.members.static",
+        "why": "The precise standard contract behind sync_with_stdio.",
+        "publisher": "C++ working draft"
+      }
+    ],
+    "gcd": [
+      {
+        "title": "Euclid, extended GCD, and linear Diophantine equations — reference",
+        "url": "https://cp-algorithms.com/algebra/extended-euclid-algorithm.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "binary-power": [
+      {
+        "title": "Binary exponentiation — reference",
+        "url": "https://cp-algorithms.com/algebra/binary-exp.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "sieve": [
+      {
+        "title": "Prime sieves and smallest prime factors — reference",
+        "url": "https://cp-algorithms.com/algebra/sieve-of-eratosthenes.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "linear-sieve": [
+      {
+        "title": "Linear sieve — reference",
+        "url": "https://cp-algorithms.com/algebra/prime-sieve-linear.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "modular": [
+      {
+        "title": "Modular arithmetic and inverses — reference",
+        "url": "https://cp-algorithms.com/algebra/module-inverse.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "crt": [
+      {
+        "title": "Chinese remainder theorem — reference",
+        "url": "https://cp-algorithms.com/algebra/chinese-remainder-theorem.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "phi": [
+      {
+        "title": "Euler totient and multiplicative functions — reference",
+        "url": "https://cp-algorithms.com/algebra/phi-function.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "primality": [
+      {
+        "title": "Miller–Rabin primality testing — reference",
+        "url": "https://cp-algorithms.com/algebra/primality_tests.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "factorization": [
+      {
+        "title": "Integer factorization and Pollard rho — reference",
+        "url": "https://cp-algorithms.com/algebra/factorization.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "combinatorics": [
+      {
+        "title": "Binomial coefficients and factorial tables — reference",
+        "url": "https://cp-algorithms.com/combinatorics/binomial-coefficients.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "inclusion-exclusion": [
+      {
+        "title": "Inclusion–exclusion — reference",
+        "url": "https://cp-algorithms.com/combinatorics/inclusion-exclusion.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "matrix-power": [
+      {
+        "title": "Matrix exponentiation for recurrences — reference",
+        "url": "https://cp-algorithms.com/algebra/binary-exp.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "discrete-log": [
+      {
+        "title": "Discrete logarithms: baby-step giant-step — reference",
+        "url": "https://cp-algorithms.com/algebra/discrete-log.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "fft": [
+      {
+        "title": "FFT and polynomial convolution — reference",
+        "url": "https://cp-algorithms.com/algebra/fft.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "ntt": [
+      {
+        "title": "Number-theoretic transforms — reference",
+        "url": "https://cp-algorithms.com/algebra/fft.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "prefix-cpp": [
+      {
+        "title": "Prefix sums and difference arrays — reference",
+        "url": "https://cp-algorithms.com/data_structures/fenwick.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "fenwick": [
+      {
+        "title": "Fenwick trees — reference",
+        "url": "https://cp-algorithms.com/data_structures/fenwick.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "segment-tree": [
+      {
+        "title": "Segment trees — reference",
+        "url": "https://cp-algorithms.com/data_structures/segment_tree.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "lazy-segment": [
+      {
+        "title": "Lazy propagation — reference",
+        "url": "https://cp-algorithms.com/data_structures/segment_tree.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "persistent-segment": [
+      {
+        "title": "Persistent segment trees — reference",
+        "url": "https://cp-algorithms.com/data_structures/segment_tree.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "dsu": [
+      {
+        "title": "Disjoint Set Union — reference",
+        "url": "https://cp-algorithms.com/data_structures/disjoint_set_union.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "rollback-dsu": [
+      {
+        "title": "Rollback DSU and offline dynamic connectivity — reference",
+        "url": "https://cp-algorithms.com/data_structures/deleting_in_log_n.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "sparse-table": [
+      {
+        "title": "Sparse tables and static RMQ — reference",
+        "url": "https://cp-algorithms.com/data_structures/sparse-table.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "monotonic-queue": [
+      {
+        "title": "Monotonic stacks and queues — reference",
+        "url": "https://cp-algorithms.com/data_structures/stack_queue_modification.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "sqrt-decomposition": [
+      {
+        "title": "Square-root decomposition and Mo’s algorithm — reference",
+        "url": "https://cp-algorithms.com/data_structures/sqrt_decomposition.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "treap": [
+      {
+        "title": "Treaps and implicit sequence trees — reference",
+        "url": "https://cp-algorithms.com/data_structures/treap.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "li-chao": [
+      {
+        "title": "Li Chao trees and line envelopes — reference",
+        "url": "https://cp-algorithms.com/geometry/convex_hull_trick.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "dp-foundations": [
+      {
+        "title": "DP state design and memoization — reference",
+        "url": "https://cp-algorithms.com/dynamic_programming/intro-to-dp.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "knapsack": [
+      {
+        "title": "0/1, unbounded, and bounded knapsack — reference",
+        "url": "https://cp-algorithms.com/dynamic_programming/knapsack.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "lis": [
+      {
+        "title": "Longest increasing subsequence — reference",
+        "url": "https://cp-algorithms.com/sequences/longest_increasing_subsequence.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "interval-dp": [
+      {
+        "title": "Interval DP — reference",
+        "url": "https://cp-algorithms.com/dynamic_programming/intro-to-dp.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "tree-dp": [
+      {
+        "title": "DP on trees",
+        "url": "https://usaco.guide/gold/dp-trees",
+        "why": "A focused chapter for this exact data structure or tree-DP technique.",
+        "publisher": "USACO Guide"
+      }
+    ],
+    "rerooting": [
+      {
+        "title": "DP on trees: all roots",
+        "url": "https://usaco.guide/gold/all-roots",
+        "why": "A focused chapter for this exact data structure or tree-DP technique.",
+        "publisher": "USACO Guide"
+      }
+    ],
+    "bitmask-dp": [
+      {
+        "title": "Bitmask DP over subsets — reference",
+        "url": "https://cp-algorithms.com/algebra/all-submasks.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "sos-dp": [
+      {
+        "title": "Sum-over-subsets DP — reference",
+        "url": "https://cp-algorithms.com/algebra/all-submasks.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "digit-dp": [
+      {
+        "title": "Digit DP — reference",
+        "url": "https://cp-algorithms.com/dynamic_programming/intro-to-dp.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "profile-dp": [
+      {
+        "title": "Broken-profile DP — reference",
+        "url": "https://cp-algorithms.com/dynamic_programming/profile-dynamics.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "divide-conquer-dp": [
+      {
+        "title": "Divide-and-conquer DP optimization — reference",
+        "url": "https://cp-algorithms.com/dynamic_programming/divide-and-conquer-dp.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "knuth-dp": [
+      {
+        "title": "Knuth optimization — reference",
+        "url": "https://cp-algorithms.com/dynamic_programming/knuth-optimization.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "prefix-function": [
+      {
+        "title": "Prefix function and KMP — reference",
+        "url": "https://cp-algorithms.com/string/prefix-function.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "z-function": [
+      {
+        "title": "Z-function — reference",
+        "url": "https://cp-algorithms.com/string/z-function.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "trie": [
+      {
+        "title": "Constructing a trie",
+        "url": "https://cp-algorithms.com/string/aho_corasick.html#construction-of-the-trie",
+        "why": "A focused chapter for this exact data structure or tree-DP technique.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "string-hash": [
+      {
+        "title": "Polynomial rolling hashes — reference",
+        "url": "https://cp-algorithms.com/string/string-hashing.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "aho-corasick": [
+      {
+        "title": "Aho–Corasick multiple-pattern matching — reference",
+        "url": "https://cp-algorithms.com/string/aho_corasick.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "suffix-array": [
+      {
+        "title": "Suffix arrays and LCP — reference",
+        "url": "https://cp-algorithms.com/string/suffix-array.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "suffix-automaton": [
+      {
+        "title": "Suffix automata — reference",
+        "url": "https://cp-algorithms.com/string/suffix-automaton.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "manacher": [
+      {
+        "title": "Manacher’s palindrome algorithm — reference",
+        "url": "https://cp-algorithms.com/string/manacher.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "lyndon": [
+      {
+        "title": "Lyndon factorization and minimal rotation — reference",
+        "url": "https://cp-algorithms.com/string/lyndon_factorization.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "graph-model": [
+      {
+        "title": "Graph representations and invariants — reference",
+        "url": "https://cp-algorithms.com/graph/breadth-first-search.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "graph-bfs": [
+      {
+        "title": "BFS and unweighted shortest paths — reference",
+        "url": "https://cp-algorithms.com/graph/breadth-first-search.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "graph-dfs": [
+      {
+        "title": "DFS and connected components — reference",
+        "url": "https://cp-algorithms.com/graph/depth-first-search.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "topological": [
+      {
+        "title": "Topological sorting and DAG DP — reference",
+        "url": "https://cp-algorithms.com/graph/topological-sort.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "dijkstra": [
+      {
+        "title": "Dijkstra’s shortest paths — reference",
+        "url": "https://cp-algorithms.com/graph/dijkstra_sparse.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "zero-one-bfs": [
+      {
+        "title": "0–1 BFS — reference",
+        "url": "https://cp-algorithms.com/graph/01_bfs.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "bellman-ford": [
+      {
+        "title": "Bellman–Ford and negative cycles — reference",
+        "url": "https://cp-algorithms.com/graph/bellman_ford.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "floyd-warshall": [
+      {
+        "title": "Floyd–Warshall — reference",
+        "url": "https://cp-algorithms.com/graph/all-pair-shortest-path-floyd-warshall.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "mst-kruskal": [
+      {
+        "title": "Minimum spanning trees: Kruskal — reference",
+        "url": "https://cp-algorithms.com/graph/mst_kruskal_with_dsu.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "mst-prim": [
+      {
+        "title": "Minimum spanning trees: Prim — reference",
+        "url": "https://cp-algorithms.com/graph/mst_prim.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "scc": [
+      {
+        "title": "Strongly connected components — reference",
+        "url": "https://cp-algorithms.com/graph/strongly-connected-components.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "bridges": [
+      {
+        "title": "Bridges and articulation points — reference",
+        "url": "https://cp-algorithms.com/graph/bridge-searching.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "lca": [
+      {
+        "title": "Lowest common ancestor and binary lifting — reference",
+        "url": "https://cp-algorithms.com/graph/lca_binary_lifting.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "hld": [
+      {
+        "title": "Heavy-light decomposition — reference",
+        "url": "https://cp-algorithms.com/graph/hld.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "euler": [
+      {
+        "title": "Euler trails and Hierholzer’s algorithm — reference",
+        "url": "https://cp-algorithms.com/graph/euler_path.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "max-flow": [
+      {
+        "title": "Residual networks and augmenting paths — reference",
+        "url": "https://cp-algorithms.com/graph/edmonds_karp.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "dinic": [
+      {
+        "title": "Dinic’s maximum flow — reference",
+        "url": "https://cp-algorithms.com/graph/dinic.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "matching": [
+      {
+        "title": "Bipartite matching — reference",
+        "url": "https://cp-algorithms.com/graph/kuhn_maximum_bipartite_matching.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "min-cost-flow": [
+      {
+        "title": "Minimum-cost flow and potentials — reference",
+        "url": "https://cp-algorithms.com/graph/min_cost_flow.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "two-sat": [
+      {
+        "title": "2-SAT and implication graphs — reference",
+        "url": "https://cp-algorithms.com/graph/2SAT.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "geometry-vectors": [
+      {
+        "title": "Points, vectors, dot and cross products — reference",
+        "url": "https://cp-algorithms.com/geometry/basic-geometry.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "segment-intersection": [
+      {
+        "title": "Segment intersection — reference",
+        "url": "https://cp-algorithms.com/geometry/check-segments-intersection.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "polygon-area": [
+      {
+        "title": "Polygon area and orientation — reference",
+        "url": "https://cp-algorithms.com/geometry/area-of-simple-polygon.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "point-in-polygon": [
+      {
+        "title": "Point-in-polygon queries — reference",
+        "url": "https://cp-algorithms.com/geometry/point-in-convex-polygon.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "convex-hull": [
+      {
+        "title": "Convex hull by monotone chain — reference",
+        "url": "https://cp-algorithms.com/geometry/convex-hull.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "convex-queries": [
+      {
+        "title": "Point in a convex polygon — reference",
+        "url": "https://cp-algorithms.com/geometry/point-in-convex-polygon.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "rotating-calipers": [
+      {
+        "title": "Rotating calipers — reference",
+        "url": "https://cp-algorithms.com/geometry/convex-hull.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "closest-pair": [
+      {
+        "title": "Closest pair of points — reference",
+        "url": "https://cp-algorithms.com/geometry/nearest_points.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "line-circle": [
+      {
+        "title": "Line, circle, and circle-circle intersection — reference",
+        "url": "https://cp-algorithms.com/geometry/circle-circle-intersection.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ],
+    "half-plane": [
+      {
+        "title": "Half-plane intersection — reference",
+        "url": "https://cp-algorithms.com/geometry/halfplane-intersection.html",
+        "why": "Study the derivation, invariant and complexity for this topic.",
+        "publisher": "cp-algorithms"
+      }
+    ]
+  }
+}

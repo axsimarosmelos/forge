@@ -10,7 +10,11 @@ const data=JSON.parse(read('content/curriculum.json'));
 const json=JSON.stringify(data).replace(/</g,'\\u003c');
 // Only repository-authored Markdown is rendered. Do not feed user Markdown here.
 const lesson=marked.parse(read('content/cpp-stl-fast-io.md'),{gfm:true}).replaceAll('href="../templates/', 'href="templates/');
-const extension=`<style>${read('frontend/native.css')}</style>\n<script id="native-curriculum" type="application/json">${json}</script>\n<template id="stl-article">${lesson}</template>\n<script>${read('frontend/native.js')}</script>\n`;
+const refs=JSON.stringify(JSON.parse(read('content/lesson-references.json'))).replace(/</g,'\\u003c');
+const catalogs=JSON.stringify(JSON.parse(read('content/catalog/manifest.json'))).replace(/</g,'\\u003c');
+const briefs=JSON.stringify(JSON.parse(read('content/problem-briefs.json'))).replace(/</g,'\\u003c');
+const study=`<style>${read('frontend/study.css')}</style><script id="problem-briefs" type="application/json">${briefs}</script><script id="lesson-references" type="application/json">${refs}</script><script id="catalog-manifest" type="application/json">${catalogs}</script><script>${read('frontend/catalog-core.js')}</script><script>${read('frontend/study.js')}</script><script>${read('frontend/workspace-storage.js')}</script>`;
+const extension=`<style>${read('frontend/native.css')}</style>\n<script id="native-curriculum" type="application/json">${json}</script>\n<template id="stl-article">${lesson}</template>\n<script>${read('frontend/native.js')}</script>\n${study}`;
 let html=read('frontend/base.html').replace("['lab','code','Python lab']","['lab','code','Code lab']");
 if(!html.includes('</body>'))throw Error('Base document missing body end.');
 html=html.replace('</body>',()=>extension+'</body>');

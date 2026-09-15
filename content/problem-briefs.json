@@ -1,0 +1,261 @@
+{
+  "lc-1": {
+    "summary": "Given a list of integers and a target, return the indices of two different entries whose values add to the target. The task promises one valid pair.",
+    "exampleInput": "nums = [4, 9, 2], target = 11",
+    "exampleOutput": "[1, 2]",
+    "prompt": "Indices refer to positions, not the values themselves.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-217": {
+    "summary": "Decide whether an integer list contains any value more than once.",
+    "exampleInput": "nums = [8, 3, 8]",
+    "exampleOutput": "true",
+    "prompt": "The repeated values can be far apart.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-242": {
+    "summary": "Decide whether two lowercase strings contain exactly the same letters with the same multiplicities.",
+    "exampleInput": "s = \"dusty\", t = \"study\"",
+    "exampleOutput": "true",
+    "prompt": "Equal sets of letters are insufficient; compare counts.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-2235": {
+    "summary": "Return the sum of the two supplied integers.",
+    "exampleInput": "num1 = -6, num2 = 14",
+    "exampleOutput": "8",
+    "prompt": "Return the value from the required function.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-1480": {
+    "summary": "For each position in an integer list, compute the sum from the beginning through that position.",
+    "exampleInput": "nums = [3, -1, 5]",
+    "exampleOutput": "[3, 2, 7]",
+    "prompt": "The current total is the previous total plus the new element.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-1672": {
+    "summary": "Each row of a matrix lists one person’s account balances. Return the largest row sum.",
+    "exampleInput": "accounts = [[3, 4], [2, 8], [6, 1]]",
+    "exampleOutput": "10",
+    "prompt": "Compare totals rather than individual cells.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-1929": {
+    "summary": "Return a list made by placing a copy of the input list immediately after the original.",
+    "exampleInput": "nums = [7, 2]",
+    "exampleOutput": "[7, 2, 7, 2]",
+    "prompt": "Preserve order in both copies.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-1920": {
+    "summary": "For a zero-based permutation nums, build an output where output[i] equals nums[nums[i]].",
+    "exampleInput": "nums = [1, 2, 0]",
+    "exampleOutput": "[2, 0, 1]",
+    "prompt": "Trace the inner index before reading the outer value.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-412": {
+    "summary": "Build the strings for integers 1 through n: use Fizz for multiples of 3, Buzz for multiples of 5, and FizzBuzz for multiples of both; otherwise use the number.",
+    "exampleInput": "n = 5",
+    "exampleOutput": "[\"1\", \"2\", \"Fizz\", \"4\", \"Buzz\"]",
+    "prompt": "Check the combined condition before either individual condition.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-1281": {
+    "summary": "For a positive integer, return its digit product minus its digit sum.",
+    "exampleInput": "n = 312",
+    "exampleOutput": "0",
+    "prompt": "A zero digit makes the product zero.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-704": {
+    "summary": "Find a target in a sorted integer array. Return its index, or -1 if absent.",
+    "exampleInput": "nums = [-4, 1, 6, 12], target = 6",
+    "exampleOutput": "2",
+    "prompt": "Maintain a search interval that can still contain the answer.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-35": {
+    "summary": "In a strictly increasing integer array, return the target’s position, or the position where inserting it would preserve sorted order.",
+    "exampleInput": "nums = [2, 5, 9], target = 7",
+    "exampleOutput": "2",
+    "prompt": "The answer can equal the array length.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-121": {
+    "summary": "Choose one day to buy and a later day to sell. Return the greatest possible nonnegative profit.",
+    "exampleInput": "prices = [9, 4, 7, 2, 8]",
+    "exampleOutput": "6",
+    "prompt": "The buy must happen before the sell.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-20": {
+    "summary": "Check whether a string of round, square and curly brackets closes every opener in the correct nesting order.",
+    "exampleInput": "s = \"{[()]}\"",
+    "exampleOutput": "true",
+    "prompt": "Equal counts do not guarantee correct nesting.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-206": {
+    "summary": "Reverse a singly linked list and return its new head.",
+    "exampleInput": "head = 4 → 8 → 1",
+    "exampleOutput": "1 → 8 → 4",
+    "prompt": "Preserve the next pointer before redirecting a link.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-21": {
+    "summary": "Merge two sorted linked lists into a sorted result by connecting their nodes.",
+    "exampleInput": "a = 1 → 7, b = 3 → 5",
+    "exampleOutput": "1 → 3 → 5 → 7",
+    "prompt": "The smaller current head is the next safe choice.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-70": {
+    "summary": "Count how many ordered sequences of one-step and two-step moves reach stair n.",
+    "exampleInput": "n = 4",
+    "exampleOutput": "5",
+    "prompt": "Count move sequences, not just the number of two-step moves.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-198": {
+    "summary": "Choose a subset of nonadjacent houses to maximize the sum of their values.",
+    "exampleInput": "values = [3, 8, 4, 9]",
+    "exampleOutput": "17",
+    "prompt": "For each position compare taking it with skipping it.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-322": {
+    "summary": "Using unlimited coins of the given denominations, find the fewest coins that sum to an amount, or -1 if no combination works.",
+    "exampleInput": "coins = [1, 4, 6], amount = 8",
+    "exampleOutput": "2",
+    "prompt": "Taking the largest coin first need not be optimal.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-200": {
+    "summary": "Count connected groups of land cells in a grid. Land connects vertically or horizontally; diagonals do not connect.",
+    "exampleInput": "grid = [\"110\", \"010\", \"001\"]",
+    "exampleOutput": "2",
+    "prompt": "Mark a cell when adding it to your traversal to avoid duplicate work.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-733": {
+    "summary": "Starting at one image cell, recolor all four-directionally connected cells with its original color.",
+    "exampleInput": "image = [[2,2],[2,3]], start = (0,0), color = 7",
+    "exampleOutput": "[[7,7],[7,3]]",
+    "prompt": "If the new color equals the old color, stop immediately.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "lc-104": {
+    "summary": "Return the maximum number of nodes on a path from a binary tree’s root to a leaf.",
+    "exampleInput": "root 6 has child 2, which has child 9",
+    "exampleOutput": "3",
+    "prompt": "An empty tree has depth zero.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "cf-4-A": {
+    "summary": "Decide whether an integer weight can be split into two strictly positive even integer weights.",
+    "exampleInput": "weight = 10",
+    "exampleOutput": "YES",
+    "prompt": "Both pieces must be positive; test weight 2 separately.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "cf-71-A": {
+    "summary": "For each word, leave it unchanged if it has at most ten characters. Otherwise output its first letter, the count of interior letters, and its last letter.",
+    "exampleInput": "word = \"characterization\"",
+    "exampleOutput": "c14n",
+    "prompt": "The threshold uses the full word length.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "cf-231-A": {
+    "summary": "Each row contains three binary decisions. Count rows where at least two decisions are 1.",
+    "exampleInput": "rows = [[1,0,1], [0,1,0], [1,1,1]]",
+    "exampleOutput": "2",
+    "prompt": "Sum the three values in each row.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "cf-50-A": {
+    "summary": "Find the maximum number of nonoverlapping 2-cell dominoes that fit on an m-by-n rectangular board.",
+    "exampleInput": "m = 3, n = 5",
+    "exampleOutput": "7",
+    "prompt": "An odd total cell count leaves one cell uncovered.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "cf-282-A": {
+    "summary": "Start an integer at zero and process statements that increment or decrement it once. Return the final integer.",
+    "exampleInput": "statements = [\"++X\", \"X--\", \"X++\"]",
+    "exampleOutput": "1",
+    "prompt": "Prefix versus postfix does not change this task’s final value.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "cf-1-A": {
+    "summary": "Cover a rectangular area with square tiles of a fixed side length. Tiles may extend beyond its border. Find the minimum number of tiles.",
+    "exampleInput": "height = 7, width = 10, side = 4",
+    "exampleOutput": "6",
+    "prompt": "Round up each dimension independently and use a wide product.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "at-abc086_a": {
+    "summary": "Read two integers and report whether their product is odd or even.",
+    "exampleInput": "a = 5, b = 8",
+    "exampleOutput": "Even",
+    "prompt": "A product is odd exactly when both factors are odd.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "at-abc081_a": {
+    "summary": "Count how many of the three supplied binary characters are 1.",
+    "exampleInput": "bits = \"101\"",
+    "exampleOutput": "2",
+    "prompt": "Characters and integer values are different types.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "at-abc081_b": {
+    "summary": "Repeatedly divide every number in the list by two while all numbers are even. Count how many complete rounds are possible.",
+    "exampleInput": "values = [12, 20, 28]",
+    "exampleOutput": "2",
+    "prompt": "The first number that becomes odd stops the whole process.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "at-abc087_b": {
+    "summary": "Count combinations of available 500-, 100- and 50-value coins that total a target. Coins of the same value are indistinguishable.",
+    "exampleInput": "available = [1, 2, 3], target = 200",
+    "exampleOutput": "2",
+    "prompt": "Enumerate quantities within their available limits.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "at-abc083_b": {
+    "summary": "Among integers from 1 to n, sum those whose decimal digit sum lies in the inclusive interval [a,b].",
+    "exampleInput": "n = 12, a = 3, b = 3",
+    "exampleOutput": "15",
+    "prompt": "Test the digit sum, then add the original number.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "at-abc088_b": {
+    "summary": "Two players alternate taking one remaining number. Both maximize their own final total. Return the first player’s total minus the second player’s total.",
+    "exampleInput": "values = [9, 2, 6, 1]",
+    "exampleOutput": "4",
+    "prompt": "Sort in descending order and alternate ownership.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "at-abc085_b": {
+    "summary": "Each item has a size. Find the maximum length of a stack whose sizes strictly decrease from bottom to top.",
+    "exampleInput": "sizes = [8, 5, 8, 3]",
+    "exampleOutput": "3",
+    "prompt": "Only distinct sizes contribute another level.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "at-abc085_c": {
+    "summary": "Given a count of banknotes and a total value, find counts of 10000-, 5000- and 1000-value notes meeting both conditions, or report impossibility.",
+    "exampleInput": "note count = 3, total = 16000",
+    "exampleOutput": "1 1 1",
+    "prompt": "Derive the third count after choosing the first two.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  },
+  "at-abc086_c": {
+    "summary": "A traveler starts at the origin at time zero and must visit specified grid positions at specified times, moving one unit horizontally or vertically each time unit. Decide whether the schedule is possible.",
+    "exampleInput": "visits = [(3,1,2), (5,2,2)]",
+    "exampleOutput": "No",
+    "prompt": "Check both Manhattan distance and the parity of extra time.",
+    "authorship": "Original Forge study brief with an original example. This is a compact restatement, not the full official statement or its limits."
+  }
+}

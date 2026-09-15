@@ -1,0 +1,38 @@
+name: Check Forge in Chromium
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - frontend/**
+      - tests/**
+      - .github/workflows/browser-checks.yml
+permissions:
+  contents: read
+concurrency:
+  group: forge-browser-checks
+  cancel-in-progress: true
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Planning, source and frontend regressions
+        run: |
+          node tests/catalog-core.cjs
+          node tests/frontend.cjs
+          python3 tests/catalog_sources.py
+      - name: Test the built site in a real browser
+        run: node tests/browser-smoke.mjs
+      - name: Save browser screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: forge-browser-screenshots
+          path: test-results/*.png
+          retention-days: 7

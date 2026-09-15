@@ -96,6 +96,19 @@
   resourcesView=function(){return original.resourcesView()+`<div class="spacer"></div><div class="card pad"><h2>C, C++ and advanced algorithms</h2><a class="quick-link" href="#native/cpp">C++ foundation lessons ${icon('arrow',13)}</a><a class="quick-link" href="#native/cpp-stl-fast-io">Complete STL and fast-I/O module ${icon('arrow',13)}</a><a class="quick-link" href="#native/atlas">Algorithm Atlas · 78 study plans ${icon('arrow',13)}</a><a class="quick-link" href="content/curriculum.json" target="_blank" rel="noopener">Comprehensive curriculum JSON ${icon('up',13)}</a><a class="quick-link" href="https://github.com/axsimarosmelos/forge/blob/main/ARCHITECTURE.md" target="_blank" rel="noopener">Execution architecture and deployment guide ${icon('up',13)}</a></div>`;};
   render=function(){if(connected&&ns().apiUrl!==connectedBase){if(pollController)pollController.abort();pollController=null;nativeBusy=false;executionToken='';connectedBase='';connected=false;}const route=(location.hash.slice(1)||'today').split('/');if(route[0]==='native'){updateChrome();$('#crumb').textContent='C / C++ & Algorithms';$$('.navitem').forEach(e=>e.classList.toggle('active',e.dataset.nav==='learn'));$('#app').innerHTML=(['c','cpp','atlas'].includes(route[1])?nativeHome(route[1]):nativeLesson(route[1]||'cpp-start'))+footer();document.title='Forge · C / C++ & Algorithms';}else original.render();if(route[0]==='lab'&&ns().language!=='python')paintEditor();if(route[0]==='today'){const card=document.createElement('div');card.className='banner';card.innerHTML=`New in your studio: <a href="#native/c">C foundations</a> · <a href="#native/cpp">C++ foundations</a> · <a href="#native/cpp-stl-fast-io">STL & fast I/O</a> · <a href="#native/atlas">Algorithm atlas</a>. Choose one primary contest language while you build fluency.`;$('#app').prepend(card);}};
   document.addEventListener('keydown',e=>{if(e.key==='Tab'&&e.target.id==='native-source'){e.preventDefault();const t=e.target,a=t.selectionStart,b=t.selectionEnd;t.value=t.value.slice(0,a)+'    '+t.value.slice(b);t.selectionStart=t.selectionEnd=a+4;saveDraft(t.value);}});
-  window.ForgeNative={highlight,saveDraft,saveStdin,syncScroll,changeLanguage,connectDialog,connect,disconnect,run:runNative,stop,openLesson:id=>go('native/'+id),loadExample,check,complete,filter:id=>{moduleFilter=id;render();},downloadCode:()=>{const lang=ns().language;download('main.'+(lang==='c'?'c':'cpp'),ns().drafts[lang].source,'text/plain');}};
+  async function executeExternal(payload,signal){
+    if(!connected||ns().apiUrl!==connectedBase)throw Error('Connect your compiler service first.');
+    const base=connectedBase,token=executionToken;
+    let job=await fetchJSON('/v1/submissions',{method:'POST',body:payload,signal,base,token});
+    const started=Date.now();
+    while(!job.done){
+      if(signal?.aborted)throw new DOMException('Stopped','AbortError');
+      if(Date.now()-started>75000)throw Error('Execution service deadline exceeded. This is not an algorithm time-limit verdict.');
+      await new Promise((resolve,reject)=>{const abort=()=>{clearTimeout(timer);reject(new DOMException('Stopped','AbortError'));};const timer=setTimeout(()=>{signal?.removeEventListener('abort',abort);resolve();},900);signal?.addEventListener('abort',abort,{once:true});if(signal?.aborted)abort();});
+      job=await fetchJSON('/v1/submissions/'+encodeURIComponent(job.id),{signal,base,token});
+    }
+    return job;
+  }
+  window.ForgeNative={isConnected:()=>connected&&ns().apiUrl===connectedBase,execute:executeExternal,highlight,saveDraft,saveStdin,syncScroll,changeLanguage,connectDialog,connect,disconnect,run:runNative,stop,openLesson:id=>go('native/'+id),loadExample,check,complete,filter:id=>{moduleFilter=id;render();},downloadCode:()=>{const lang=ns().language;download('main.'+(lang==='c'?'c':'cpp'),ns().drafts[lang].source,'text/plain');}};
   render();
 })();
