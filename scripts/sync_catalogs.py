@@ -126,9 +126,10 @@ def extract_editorial(markdown, problem_id):
         if len(parts) > 1:
             for m in re.finditer(r'####\s+([^\n]+)\s*\n+```([^\n]*)\n(.*?)```', parts[1], re.S):
                 label, lang, code = m.groups()
-                if label.strip() in ('Python3', 'Python', 'C++', 'C', 'MySQL', 'PostgreSQL', 'JavaScript', 'TypeScript', 'Bash'):
+                if code.strip() and label.strip() in ('Python3', 'Python', 'C++', 'C', 'MySQL', 'PostgreSQL', 'JavaScript', 'TypeScript', 'Bash'):
                     codes.append({'language': label.strip(), 'code': code.strip()})
-        if explanation or codes:
+        prose = re.sub(r'^#+[^\n]*', '', explanation, flags=re.M).strip()
+        if len(prose) >= 30 or codes:
             solutions.append({'explanation': explanation[:40000], 'codes': codes})
     if not solutions:
         return None
