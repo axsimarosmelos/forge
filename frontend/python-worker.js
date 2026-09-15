@@ -57,9 +57,10 @@ self.onmessage=async ({data})=>{
     try{
       py.globals.set('_forge_source',data.source);
       py.globals.set('_forge_scope',scope);
-      if(data.trace)await py.runPythonAsync(tracer+'\n_sys.settrace(_forge_trace)');
-      try{await py.runPythonAsync("exec(compile(_forge_source, '<forge-user>', 'exec'), _forge_scope)");}
-      finally{if(data.trace){await py.runPythonAsync('_sys.settrace(None)');steps=JSON.parse(await py.runPythonAsync('_json.dumps(_forge_steps)'));traceTruncated=await py.runPythonAsync('_forge_overflow');}}
+      try{
+        if(data.trace)await py.runPythonAsync(tracer+"\n_sys.settrace(_forge_trace)\ntry:\n    exec(compile(_forge_source, '<forge-user>', 'exec'), _forge_scope)\nfinally:\n    _sys.settrace(None)");
+        else await py.runPythonAsync("exec(compile(_forge_source, '<forge-user>', 'exec'), _forge_scope)");
+      }finally{if(data.trace){steps=JSON.parse(await py.runPythonAsync('_json.dumps(_forge_steps)'));traceTruncated=await py.runPythonAsync('_forge_overflow');}}
     }catch(e){status='runtime_error';error=e.message;}finally{scope.destroy();}
     self.postMessage({kind:'done',status,stdout,stderr,error,steps,traceTruncated,outputTruncated:truncated});
   }catch(e){self.postMessage({kind:'error',error:'Python runtime could not load: '+e.message});}
