@@ -17,3 +17,5 @@ assert.equal(C.validate(state).workspaces['lc-1'].review.successes,0);
 assert.throws(()=>C.validate({...state,workspaces:{'lc-1':{...state.workspaces['lc-1'],review:{...r,reasons:['<script>']}}}}));
 assert.throws(()=>C.validate({...state,workspaces:{'lc-1':{...state.workspaces['lc-1'],tests:[{stdin:42,expected:''}]}}}));
 console.log('PASS: revision due dates, failure resets, spaced independent re-solves, empty-output tests, service-error distinction, calendar blocks, new-language backups.');
+
+state.workspaces['lc-1'].compilerDraft={language:'rust',files:[{name:'main.rs',content:'fn main() {}'}]};assert.equal(C.validate(state).workspaces['lc-1'].compilerDraft.language,'rust');assert.throws(()=>C.validate({...state,workspaces:{'lc-1':{...state.workspaces['lc-1'],compilerDraft:{language:'javascript:alert(1)',files:[]}}}}));

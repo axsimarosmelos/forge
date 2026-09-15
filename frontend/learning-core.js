@@ -24,6 +24,8 @@
     return {pass,reason:pass?null:'wrong'};
   }
   function validateWorkspace(w){
+    if(w.compilerDraft!==undefined){const d=w.compilerDraft;if(!d||typeof d.language!=='string'||!/^[-a-z0-9+#.]{1,50}$/i.test(d.language)||!Array.isArray(d.files)||!d.files.length||d.files.length>10||d.files.some(f=>!f||typeof f.name!=='string'||f.name.length>120||typeof f.content!=='string'||f.content.length>100000)||d.files.reduce((n,f)=>n+f.content.length,0)>150000)throw Error('Invalid embedded compiler draft.');}
+
     const finite=(x,a,b)=>Number.isFinite(x)&&x>=a&&x<=b;
     if(w.review!==undefined){const r=w.review;if(!r||!finite(r.due,0,1e15)||!Number.isInteger(r.successes)||r.successes<0||r.successes>5||!finite(r.last,0,1e15)||!Array.isArray(r.reasons)||r.reasons.length>7||r.reasons.some(s=>!Object.hasOwn(reasons,s)))throw Error('Invalid revision schedule.');}
     if(w.timebox!==undefined&&!finite(w.timebox,5,180))throw Error('Invalid attempt time limit.');

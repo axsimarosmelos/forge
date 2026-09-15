@@ -6,7 +6,7 @@ const native=html.match(/<script id="native-curriculum" type="application\/json"
 const embedded=new Map([...html.matchAll(/<script id="([^"]+)" type="application\/json">([\s\S]*?)<\/script>/g)].map(m=>[m[1],m[2]]));
 const article=html.match(/<template id="stl-article">([\s\S]*?)<\/template>/)[1];
 const elements=new Map(),storage=new Map();
-function el(id){if(!elements.has(id))elements.set(id,{id,innerHTML:'',textContent:'',value:'',style:{},classList:{add(){},remove(){},toggle(){}},focus(){},disabled:false,prepend(node){this.innerHTML=node.innerHTML+this.innerHTML;}});return elements.get(id);}
+function el(id){if(!elements.has(id))elements.set(id,{id,innerHTML:'',textContent:'',value:'',style:{},classList:{add(){},remove(){},toggle(){}},focus(){},disabled:false,prepend(node){this.innerHTML=node.innerHTML+this.innerHTML;},appendChild(node){this.innerHTML+=node.innerHTML;}});return elements.get(id);}
 const sandbox={console,Date,Math,JSON,Set,Map,URL,Blob,Error,Number,String,Array,Object,RegExp,AbortController,DOMException,TextEncoder,location:{hash:''},localStorage:{getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)},document:{getElementById:id=>embedded.has(id)?{textContent:embedded.get(id)}:id==='stl-article'?{innerHTML:article}:el('#'+id),querySelector:s=>el(s),querySelectorAll:()=>[],body:{style:{}},addEventListener(){},createElement:()=>({innerHTML:'',className:''})},scrollTo(){},addEventListener(){},setTimeout(){return 1},clearTimeout(){},setInterval(){return 1},FormData:class{constructor(x){this.x=x}get(k){return this.x[k]??null}}};
 sandbox.window=sandbox;vm.createContext(sandbox);
 for(const script of scripts){if(!script[0].includes('type="application/json"'))vm.runInContext(script[1],sandbox);}

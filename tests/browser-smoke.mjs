@@ -75,6 +75,13 @@ try{
   await send('Emulation.setDeviceMetricsOverride',{width:375,height:812,deviceScaleFactor:1,mobile:true});
   for(const [hash,selector] of [['#practice','.problem-row'],['#problem/lc-1','#problem-code'],['#roadmap','.plan-metrics']]){await route(hash,selector);const widths=await evaluate('({content:document.documentElement.scrollWidth,viewport:innerWidth})');assert(widths.content<=376,hash+' overflows the 375px mobile viewport: '+JSON.stringify(widths));}
   await screenshot('plan-mobile');
+  // Hosted compiler integration uses exact origins and rejects malformed draft messages.
+  await route('#problem/lc-1','#problem-code');
+  await evaluate('ForgeCompiler.open("lc-1")');
+  assert((await evaluate('document.querySelector("#compiler-embed").src')).startsWith('https://onecompiler.com/embed/python?'));
+  assert.equal(await evaluate('ForgeCompiler.validateDraft({language:"rust",files:[{name:"main.rs",content:"fn main() {}"}]}).language'),'rust');
+  assert.equal(await evaluate('ForgeCompiler.validateDraft({language:"javascript:alert(1)",files:[]})'),null);
+  await evaluate('closeModal()');
   // New curriculum, real browser JavaScript, Python traces and repair persistence.
   await route('#curriculum','.study-week');
   assert.equal(await evaluate('document.querySelectorAll(".study-week").length'),16);
