@@ -1,0 +1,11 @@
+# Catalog and explanation sources
+
+Forge combines public problem metadata with linked educational resources. Platform names are used for identification; Forge is not affiliated with LeetCode, Codeforces, AtCoder, NeetCode or Python Tutor.
+
+- LeetCode IDs, names, difficulty, topic tags and premium markers: [Doocs/leetcode index](https://github.com/doocs/leetcode/blob/main/solution/README_EN.md), licensed [CC BY-SA 4.0](../../licenses/doocs-CC-BY-SA-4.0.txt). These are community snapshots and may lag the platform.
+- Community-authored explanations and code templates: Doocs/leetcode contributors, same license. Forge extracts only marked solution sections, selects supported language templates and simplifies formatting. Official LeetCode descriptions, examples and hidden tests are excluded. Each entry links its exact source. Extracted/adapted editorial data is distributed under CC BY-SA 4.0; this license does not apply to unrelated Forge application code.
+- Selected video mappings: [NeetCode's creator-maintained catalog](https://github.com/neetcode-gh/leetcode/blob/main/.problemSiteData.json), [MIT license](../../licenses/neetcode-MIT.txt). Mappings are checked against problem IDs; videos were not individually watched in full. Videos remain hosted by their creators and are embedded using YouTube's player. A missing video is labeled, with optional search and personal-link tools.
+- Codeforces metadata: [official public API](https://codeforces.com/apiHelp). Full public problemset response at refresh time; Gym/private archives are not covered.
+- AtCoder metadata and estimated difficulty: [AtCoder Problems datasets](https://github.com/kenkoooo/AtCoderProblems/blob/main/doc/api.md), an unofficial community service. Its starter bootcamp list and code are [MIT licensed](../../licenses/atcoder-problems-MIT.txt). Difficulty estimates are not official AtCoder ratings.
+
+No platform cookies, credentials, premium statements or private tests are requested. Progress, personal notes and pasted personal study text remain in your browser/backup. Official judging and contests remain on their original platforms. Catalog refresh errors preserve the last valid snapshot and appear in manifest.json.

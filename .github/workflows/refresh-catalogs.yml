@@ -1,0 +1,41 @@
+name: Refresh problem catalogs
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/sync_catalogs.py
+      - .github/workflows/refresh-catalogs.yml
+permissions:
+  contents: write
+concurrency:
+  group: forge-catalog-refresh
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get licensed community explanations
+        uses: actions/checkout@v4
+        with:
+          repository: doocs/leetcode
+          path: upstream-editorials
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /LICENSE
+            /solution/*/*/README_EN.md
+          persist-credentials: false
+      - name: Refresh metadata and extract community-authored solutions
+        run: python3 scripts/sync_catalogs.py --editorial-root upstream-editorials
+      - name: Save refreshed catalogs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/catalog content/editorials
+          if ! git diff --cached --quiet; then
+            git commit -m "Refresh public problem metadata and licensed community explanations"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
