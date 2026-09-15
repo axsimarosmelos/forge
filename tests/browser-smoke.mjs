@@ -10,7 +10,7 @@ const mime={'.html':'text/html','.json':'application/json','.js':'text/javascrip
 const server=createServer(async(req,res)=>{try{const pathname=decodeURIComponent(new URL(req.url,'http://local').pathname).replace(/^\/forge\//,'/');const file=resolve(root,'.'+(pathname==='/'?'/index.html':pathname));if(!file.startsWith(root+sep))throw Error('Invalid path');const data=await readFile(file);res.writeHead(200,{'Content-Type':mime[extname(file)]||'text/plain','Cache-Control':'no-store'});res.end(data);}catch{res.writeHead(404);res.end('Not found');}});
 await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
 const port=server.address().port;
-const chrome=spawn(process.env.CHROME_BIN||'google-chrome',['--headless=new','--no-sandbox','--disable-dev-shm-usage','--remote-debugging-port=9222','--user-data-dir='+profile,'about:blank'],{stdio:['ignore','ignore','pipe']});
+const chrome=spawn(process.env.CHROME_BIN||'google-chrome',['--headless=new','--no-sandbox','--disable-dev-shm-usage','--remote-debugging-port=0','--user-data-dir='+profile,'about:blank'],{stdio:['ignore','ignore','pipe']});
 let launchError='',ws;chrome.on('error',e=>{launchError=e.message;});chrome.stderr.on('data',b=>{launchError=(launchError+b).slice(-5000);});
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let sequence=0;const pending=new Map(),runtimeErrors=[];
@@ -21,7 +21,8 @@ async function route(hash,selector){await evaluate(`location.hash=${JSON.stringi
 async function screenshot(name){const {data}=await send('Page.captureScreenshot',{format:'png',captureBeyondViewport:false});await mkdir(resolve(root,'test-results'),{recursive:true});await writeFile(resolve(root,'test-results',name+'.png'),Buffer.from(data,'base64'));}
 try{
   let target;
-  for(let i=0;i<50;i++){try{target=await (await fetch('http://127.0.0.1:9222/json/new?about:blank',{method:'PUT'})).json();break;}catch{await sleep(100);}}
+  // Chrome can take longer to start on shared runners; use its assigned port.
+  for(let i=0;i<200;i++){try{const debugPort=(await readFile(resolve(profile,'DevToolsActivePort'),'utf8')).split('\n')[0];target=await (await fetch('http://127.0.0.1:'+debugPort+'/json/new?about:blank',{method:'PUT',signal:AbortSignal.timeout(2000)})).json();if(target.webSocketDebuggerUrl)break;}catch{}await sleep(150);}
   assert(target,'Chrome did not start: '+launchError);
   ws=new WebSocket(target.webSocketDebuggerUrl);
   await new Promise((resolve,reject)=>{ws.addEventListener('open',resolve,{once:true});ws.addEventListener('error',reject,{once:true});});
