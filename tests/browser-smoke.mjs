@@ -46,6 +46,8 @@ try{
   assert(await evaluate('document.querySelector("#editorial-content").textContent.includes("Doocs")'));
   assert(await evaluate('document.querySelectorAll("#editorial-content .template-details").length>=2'));
   await evaluate('ForgeStudy.update("lc-1","code","print(19)\\n"); ForgeStudy.update("lc-1","notes","Use a map of earlier values."); ForgeStudy.update("lc-1","expected","19");state.quiz.hello={passed:[0,1],wrong:0};completeLesson("hello")');
+  // Completing a lesson intentionally navigates to Review. Return before the reload check.
+  await route('#problem/lc-1','#problem-code');
   await until(`new Promise(resolve=>{const request=indexedDB.open('forge-code-workspaces',1);request.onsuccess=()=>{const db=request.result;const read=db.transaction('workspaces').objectStore('workspaces').get(state.study.workspaceEpoch+':lc-1');read.onsuccess=()=>{resolve(read.result?.value.drafts.python==='print(19)\\n');db.close();};};})`);
   assert.equal(await evaluate('Object.keys(JSON.parse(localStorage.getItem(KEY)).study.workspaces).length'),0,'larger drafts must stay out of small localStorage');
   await send('Page.reload',{ignoreCache:true});
@@ -70,7 +72,7 @@ try{
   assert(await evaluate('state.study.end===ForgeCatalogCore.addMonths(state.study.start,4)'));
   await screenshot('plan-desktop');
   await send('Emulation.setDeviceMetricsOverride',{width:375,height:812,deviceScaleFactor:1,mobile:true});
-  for(const [hash,selector] of [['#practice','.problem-row'],['#problem/lc-1','#problem-code'],['#roadmap','.plan-metrics']]){await route(hash,selector);const widths=await evaluate('({content:document.documentElement.scrollWidth,viewport:innerWidth})');assert(widths.content<=widths.viewport+1,hash+' overflows mobile: '+JSON.stringify(widths));}
+  for(const [hash,selector] of [['#practice','.problem-row'],['#problem/lc-1','#problem-code'],['#roadmap','.plan-metrics']]){await route(hash,selector);const widths=await evaluate('({content:document.documentElement.scrollWidth,viewport:innerWidth})');assert(widths.content<=376,hash+' overflows the 375px mobile viewport: '+JSON.stringify(widths));}
   await screenshot('plan-mobile');
   // Portable backup includes IndexedDB drafts; importing and resetting use fresh generations.
   await evaluate('window.savedBackup=null;download=(name,text)=>{window.savedBackup=JSON.parse(text)};exportData()');
