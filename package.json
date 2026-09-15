@@ -8,7 +8,7 @@
   },
   "scripts": {
     "build": "python3 scripts/generate_curriculum.py && python3 scripts/generate_references.py && python3 scripts/generate_briefs.py && node scripts/build.mjs",
-    "test": "node --test tests/backend.test.mjs && node tests/catalog-core.cjs && node tests/frontend.cjs && python3 tests/catalog_sources.py && python3 tests/curriculum.py",
+    "test": "node --test tests/backend.test.mjs && node tests/catalog-core.cjs && node tests/frontend.cjs && python3 tests/catalog_sources.py && python3 tests/curriculum.py && node tests/learning-core.cjs && python3 tests/learning-content.py",
     "start:api": "node --env-file=backend/.env backend/server.mjs"
   },
   "devDependencies": {

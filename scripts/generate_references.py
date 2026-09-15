@@ -52,8 +52,11 @@ c = {
 'c-pointers': ('Pointers and dereferencing', 'pointers.html'),
 'c-memory': ('Manual memory allocation', 'manual-memory-allocation.html'),
 }
+# Book locations refer to the user-provided K&R second edition; no PDF is republished.
+book_sections={'c-start':'1.1–1.4','c-io':'1.5 and Chapter 7','c-control':'Chapters 2–3','c-arrays':'1.6, 1.9 and 5.3–5.9','c-pointers':'Chapters 4–5','c-memory':'7.8.5 and 8.7'}
 for key, (title, path) in c.items():
-    add(key, title, BEEJ+path, 'A focused, beginner-oriented chapter from the author of Beej’s Guide to C.', 'Beej’s Guide to C')
+    add(key, 'K&R, second edition · '+book_sections[key], 'https://axsimarosmelos.github.io/forge/#curriculum', 'Primary reading: the uploaded The C Programming Language by Kernighan and Ritchie. Use these sections with this lesson and the weekly exercises.', 'Kernighan & Ritchie')
+    add(key, title, BEEJ+path, 'Supplementary modern-C explanation for the book’s topic.', 'Beej’s Guide to C')
 add('c-arrays', 'Null-terminated strings', BEEJ+'strings.html', 'Connect the final zero byte to array capacity and safe input.', 'Beej’s Guide to C')
 cpp = {
 'cpp-start': ('Statements and program structure', 'statements-and-the-structure-of-a-program/'),

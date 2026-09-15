@@ -12,8 +12,8 @@
     request.onupgradeneeded=()=>request.result.createObjectStore('workspaces',{keyPath:'key'});
     request.onerror=()=>reject(request.error);request.onblocked=()=>reject(Error('Workspace database is blocked by another tab.'));
     request.onsuccess=()=>{db=request.result;const generation=epoch(),read=db.transaction('workspaces','readonly').objectStore('workspaces').getAll();read.onerror=()=>reject(read.error);read.onsuccess=()=>{
-      if(state===initialState)for(const row of read.result)if(row.generation===generation&&!touched.has(row.id))state.study.workspaces[row.id]=row.value;
-      hydrated=true;resolve(db);if(location.hash.startsWith('#problem/'))render();
+      if(state===initialState)for(const row of read.result)if(row.generation===generation&&!touched.has(row.id)){try{ForgeCatalogCore.validate({...state.study,attempts:[],workspaces:{[row.id]:row.value}});state.study.workspaces[row.id]=row.value;}catch{unavailable=true;warn();}}
+      hydrated=true;resolve(db);if(['problem','practice','roadmap','review','today','curriculum'].includes(location.hash.slice(1).split('/')[0]||'today'))render();
     };};
   }).catch(()=>{unavailable=true;warn();return null;});
   window.ForgeWorkspaceStorage={touch:id=>{dirty.add(id);touched.add(id);},ready};

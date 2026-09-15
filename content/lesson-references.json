@@ -209,33 +209,57 @@
     ],
     "c-start": [
       {
+        "title": "K&R, second edition · 1.1–1.4",
+        "url": "https://axsimarosmelos.github.io/forge/#curriculum",
+        "why": "Primary reading: the uploaded The C Programming Language by Kernighan and Ritchie. Use these sections with this lesson and the weekly exercises.",
+        "publisher": "Kernighan & Ritchie"
+      },
+      {
         "title": "Hello, World and compilation",
         "url": "https://beej.us/guide/bgc/html/split/hello-world.html",
-        "why": "A focused, beginner-oriented chapter from the author of Beej’s Guide to C.",
+        "why": "Supplementary modern-C explanation for the book’s topic.",
         "publisher": "Beej’s Guide to C"
       }
     ],
     "c-io": [
       {
+        "title": "K&R, second edition · 1.5 and Chapter 7",
+        "url": "https://axsimarosmelos.github.io/forge/#curriculum",
+        "why": "Primary reading: the uploaded The C Programming Language by Kernighan and Ritchie. Use these sections with this lesson and the weekly exercises.",
+        "publisher": "Kernighan & Ritchie"
+      },
+      {
         "title": "Formatted input and output",
         "url": "https://beej.us/guide/bgc/html/split/file-inputoutput.html",
-        "why": "A focused, beginner-oriented chapter from the author of Beej’s Guide to C.",
+        "why": "Supplementary modern-C explanation for the book’s topic.",
         "publisher": "Beej’s Guide to C"
       }
     ],
     "c-control": [
       {
+        "title": "K&R, second edition · Chapters 2–3",
+        "url": "https://axsimarosmelos.github.io/forge/#curriculum",
+        "why": "Primary reading: the uploaded The C Programming Language by Kernighan and Ritchie. Use these sections with this lesson and the weekly exercises.",
+        "publisher": "Kernighan & Ritchie"
+      },
+      {
         "title": "Variables, operators and flow control",
         "url": "https://beej.us/guide/bgc/html/split/variables-and-statements.html",
-        "why": "A focused, beginner-oriented chapter from the author of Beej’s Guide to C.",
+        "why": "Supplementary modern-C explanation for the book’s topic.",
         "publisher": "Beej’s Guide to C"
       }
     ],
     "c-arrays": [
       {
+        "title": "K&R, second edition · 1.6, 1.9 and 5.3–5.9",
+        "url": "https://axsimarosmelos.github.io/forge/#curriculum",
+        "why": "Primary reading: the uploaded The C Programming Language by Kernighan and Ritchie. Use these sections with this lesson and the weekly exercises.",
+        "publisher": "Kernighan & Ritchie"
+      },
+      {
         "title": "Arrays, bounds and pointers",
         "url": "https://beej.us/guide/bgc/html/split/arrays.html",
-        "why": "A focused, beginner-oriented chapter from the author of Beej’s Guide to C.",
+        "why": "Supplementary modern-C explanation for the book’s topic.",
         "publisher": "Beej’s Guide to C"
       },
       {
@@ -247,17 +271,29 @@
     ],
     "c-pointers": [
       {
+        "title": "K&R, second edition · Chapters 4–5",
+        "url": "https://axsimarosmelos.github.io/forge/#curriculum",
+        "why": "Primary reading: the uploaded The C Programming Language by Kernighan and Ritchie. Use these sections with this lesson and the weekly exercises.",
+        "publisher": "Kernighan & Ritchie"
+      },
+      {
         "title": "Pointers and dereferencing",
         "url": "https://beej.us/guide/bgc/html/split/pointers.html",
-        "why": "A focused, beginner-oriented chapter from the author of Beej’s Guide to C.",
+        "why": "Supplementary modern-C explanation for the book’s topic.",
         "publisher": "Beej’s Guide to C"
       }
     ],
     "c-memory": [
       {
+        "title": "K&R, second edition · 7.8.5 and 8.7",
+        "url": "https://axsimarosmelos.github.io/forge/#curriculum",
+        "why": "Primary reading: the uploaded The C Programming Language by Kernighan and Ritchie. Use these sections with this lesson and the weekly exercises.",
+        "publisher": "Kernighan & Ritchie"
+      },
+      {
         "title": "Manual memory allocation",
         "url": "https://beej.us/guide/bgc/html/split/manual-memory-allocation.html",
-        "why": "A focused, beginner-oriented chapter from the author of Beej’s Guide to C.",
+        "why": "Supplementary modern-C explanation for the book’s topic.",
         "publisher": "Beej’s Guide to C"
       }
     ],

@@ -1,0 +1,21 @@
+const assert=require('node:assert/strict');
+require('../frontend/learning-core.js');require('../frontend/catalog-core.js');
+const K=globalThis.ForgeLearningCore,C=globalThis.ForgeCatalogCore,D=K.DAY,t=100000;
+let r=K.repair(null,'wrong',t);assert.equal(r.due,t+D);assert.deepEqual(r.reasons,['wrong']);
+r=K.repair(r,'compile',t+500);assert.equal(r.due,t+D,'another mistake must not postpone revision');assert.equal(r.successes,0);
+r=K.afterAttempt(r,{outcome:'independent',confidence:'clear',minutes:20,timebox:25},t+D);assert.equal(r.successes,1);assert.equal(r.due,t+2*D);
+let early=K.afterAttempt(r,{outcome:'independent',confidence:'clear',minutes:10,timebox:25},t+D+100);assert.deepEqual(early,r,'immediate repeats cannot advance recall spacing');
+r=K.afterAttempt(r,{outcome:'independent',confidence:'clear',minutes:20,timebox:25},r.due);assert.equal(r.successes,2);assert.equal(r.due,t+5*D);
+r=K.afterAttempt(r,{outcome:'independent',confidence:'partial',minutes:20,timebox:25},r.due);assert.equal(r.successes,0);assert(r.reasons.includes('confidence'));
+assert.equal(K.compare({status:'completed',stdout:''},'').pass,true,'empty expected output can be explicitly tested');
+assert.equal(K.compare({status:'completed',stdout:'19\r\n'},'19').pass,true);
+assert.equal(K.compare({status:'completed',stdout:'19\n',outputTruncated:true},'19').pass,false);
+assert.equal(K.compare({status:'compile_error'},'').reason,'compile');assert.equal(K.compare({status:'time_limit'},'').reason,'time');assert.equal(K.compare({status:'service_timeout'},'').reason,null);
+assert.equal(K.block('2026-01-31','2026-02-27',C),3);assert.equal(K.block('2026-01-31','2026-02-28',C),4);assert.equal(K.block('2026-01-31','2026-05-30',C),15);
+const state=C.defaults('2026-09-15');state.workspaces['lc-1']={language:'judge0-71',drafts:{python:'',c:'',cpp:'','judge0-71':'print(1)'},statement:'',notes:'',stdin:'',expected:'',video:'',review:r,tests:[{stdin:'',expected:''}],timer:{deadline:t,fired:false}};
+assert.equal(C.validate(state).workspaces['lc-1'].review.successes,0);
+assert.throws(()=>C.validate({...state,workspaces:{'lc-1':{...state.workspaces['lc-1'],review:{...r,reasons:['<script>']}}}}));
+assert.throws(()=>C.validate({...state,workspaces:{'lc-1':{...state.workspaces['lc-1'],tests:[{stdin:42,expected:''}]}}}));
+console.log('PASS: revision due dates, failure resets, spaced independent re-solves, empty-output tests, service-error distinction, calendar blocks, new-language backups.');
+
+state.workspaces['lc-1'].compilerDraft={language:'rust',files:[{name:'main.rs',content:'fn main() {}'}]};assert.equal(C.validate(state).workspaces['lc-1'].compilerDraft.language,'rust');assert.throws(()=>C.validate({...state,workspaces:{'lc-1':{...state.workspaces['lc-1'],compilerDraft:{language:'javascript:alert(1)',files:[]}}}}));

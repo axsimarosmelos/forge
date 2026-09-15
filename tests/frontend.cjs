@@ -6,7 +6,7 @@ const native=html.match(/<script id="native-curriculum" type="application\/json"
 const embedded=new Map([...html.matchAll(/<script id="([^"]+)" type="application\/json">([\s\S]*?)<\/script>/g)].map(m=>[m[1],m[2]]));
 const article=html.match(/<template id="stl-article">([\s\S]*?)<\/template>/)[1];
 const elements=new Map(),storage=new Map();
-function el(id){if(!elements.has(id))elements.set(id,{id,innerHTML:'',textContent:'',value:'',style:{},classList:{add(){},remove(){},toggle(){}},focus(){},disabled:false,prepend(node){this.innerHTML=node.innerHTML+this.innerHTML;}});return elements.get(id);}
+function el(id){if(!elements.has(id))elements.set(id,{id,innerHTML:'',textContent:'',value:'',style:{},classList:{add(){},remove(){},toggle(){}},focus(){},disabled:false,prepend(node){this.innerHTML=node.innerHTML+this.innerHTML;},appendChild(node){this.innerHTML+=node.innerHTML;}});return elements.get(id);}
 const sandbox={console,Date,Math,JSON,Set,Map,URL,Blob,Error,Number,String,Array,Object,RegExp,AbortController,DOMException,TextEncoder,location:{hash:''},localStorage:{getItem:k=>storage.get(k)||null,setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)},document:{getElementById:id=>embedded.has(id)?{textContent:embedded.get(id)}:id==='stl-article'?{innerHTML:article}:el('#'+id),querySelector:s=>el(s),querySelectorAll:()=>[],body:{style:{}},addEventListener(){},createElement:()=>({innerHTML:'',className:''})},scrollTo(){},addEventListener(){},setTimeout(){return 1},clearTimeout(){},setInterval(){return 1},FormData:class{constructor(x){this.x=x}get(k){return this.x[k]??null}}};
 sandbox.window=sandbox;vm.createContext(sandbox);
 for(const script of scripts){if(!script[0].includes('type="application/json"'))vm.runInContext(script[1],sandbox);}
@@ -72,6 +72,19 @@ const h=run(String.raw`ForgeNative.highlight('<script>alert("x")</script>\nint x
 for(const lesson of JSON.parse(native).modules.flatMap(m=>m.lessons)){action(`location.hash='#native/${lesson.id}';render()`);assert(el('#app').innerHTML.includes(lesson.title.replaceAll('&','&amp;')),lesson.id);}
 for(const track of ['c','cpp','atlas'])action(`location.hash='#native/${track}';render()`);
 action(`location.hash='#lab';ForgeNative.changeLanguage('cpp');render()`);assert(el('#app').innerHTML.includes('Connect compiler service'));assert(el('#app').innerHTML.includes('native-highlight'));
+// Four-month integration: failures, timers, persisted queues and confidence affect recommendations.
+action(`ForgeStudy.acceptCatalog(JSON.parse(${JSON.stringify(fs.readFileSync(root+'/content/catalog/leetcode.json','utf8'))}));location.hash='#problem/lc-1';render()`);
+assert(el('#app').innerHTML.includes('Attempt, test, understand'));
+action(`ForgeLearning.unclear('lc-1');state.study.workspaces['lc-1'].review.due=Date.now()-1;state.study.attempts.push({pid:'lc-1',platform:'LeetCode',outcome:'independent',minutes:15,note:'',at:1,difficulty:'Easy',rating:null});state.checkins[today()]={minutes:180,energy:'steady'};`);
+assert(run(`ForgeStudy.dailyTasks().some(x=>x.problem.id==='lc-1'&&x.reason.includes('re-solve'))`),'previously solved problems must return for revision');
+action(`state.study.workspaces['lc-1'].timer={deadline:Date.now()-1,fired:false};ForgeLearning.tick()`);
+assert(run(`state.study.workspaces['lc-1'].timer.fired`));assert(run(`state.study.workspaces['lc-1'].review.reasons.includes('time')`));
+action(`ForgeStudy.log({preventDefault(){},target:{outcome:'independent',minutes:'20',confidence:'partial',note:'Cannot explain the invariant'}},'lc-1')`);
+equal(`state.study.attempts.at(-1).outcome`,'hinted');
+action(`ForgeLearning.loadDemo('lc-1')`);equal(`state.study.workspaces['lc-1'].tests.length`,2);
+equal(`validate(JSON.parse(JSON.stringify(state))).study.workspaces['lc-1'].tests.length`,2);
+action(`location.hash='#curriculum';render()`);assert(el('#app').innerHTML.includes('Kernighan'));assert(el('#app').innerHTML.includes('BLOCK 16'));
+action(`location.hash='#lab';ForgeNative.changeLanguage('cpp');render()`);
 // Compiled lesson renders all Markdown sections, tables and code safely.
 assert(article.includes('<table>'));assert(article.includes('Scoreboard Thresholds'));assert(article.includes('&lt;iostream&gt;'));
 (async()=>{

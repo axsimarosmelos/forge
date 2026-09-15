@@ -29,7 +29,7 @@ class Example {}
         encoded = json.dumps(result)
         self.assertNotIn('DO NOT COPY', encoded)
         self.assertIn('x < n while y > 0', encoded)
-        self.assertEqual(result['solutions'][0]['codes'], [{'language': 'Python3', 'code': 'print(1)'}])
+        self.assertEqual(result['solutions'][0]['codes'], [{'language': 'Python3', 'code': 'print(1)'}, {'language':'Java','code':'class Example {}'}])
         self.assertEqual(result['officialUrl'], 'https://leetcode.com/problems/two-sum')
         self.assertIsNone(sync.extract_editorial('## Description\nprivate content', 'lc-2'))
         self.assertIsNone(sync.extract_editorial('<!-- solution:start -->### Solution 1\n<!-- tabs:start -->\n#### Python3\n```python\n\n```\n<!-- solution:end -->', 'lc-3'))

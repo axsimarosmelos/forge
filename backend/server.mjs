@@ -32,15 +32,18 @@ export function configFromEnv(env=process.env) {
   if(!origins.length||origins.some(s=>{try{const u=new URL(s);return u.origin!==s||!(u.protocol==='https:'||(dev&&['localhost','127.0.0.1'].includes(u.hostname)&&u.protocol==='http:'));}catch{return true}})) throw Error('Set exact FORGE_ALLOWED_ORIGINS; wildcards, paths, and null are not allowed.');
   const ids={c:Number(env.JUDGE0_C_LANGUAGE_ID),cpp:Number(env.JUDGE0_CPP_LANGUAGE_ID)};
   if(Object.values(ids).some(n=>!Number.isSafeInteger(n)||n<=0)||ids.c===ids.cpp) throw Error('Set distinct language IDs from your provider’s /languages endpoint.');
+  const extraLanguages=env.JUDGE0_EXTRA_LANGUAGE_IDS||'';
+  if(extraLanguages!=='all'&&extraLanguages!==''&&!/^[1-9]\d{0,5}(,[1-9]\d{0,5})*$/.test(extraLanguages))throw Error('JUDGE0_EXTRA_LANGUAGE_IDS must be all or a comma-separated list of provider IDs.');
+  if(extraLanguages&&extraLanguages!=='all')for(const id of extraLanguages.split(',').map(Number)){if(!Object.values(ids).includes(id))ids['judge0-'+id]=id;}
   const authHeader=env.JUDGE0_AUTH_HEADER||'X-Auth-Token';
   if(!['X-Auth-Token','X-RapidAPI-Key'].includes(authHeader)) throw Error('Unsupported provider authentication header.');
   if(!env.JUDGE0_AUTH_TOKEN) throw Error('Set the server-only JUDGE0_AUTH_TOKEN.');
-  return { token, baseURL:base.href.replace(/\/$/,''), origins, languageIds:ids,
+  return { token, baseURL:base.href.replace(/\/$/,''), origins, languageIds:ids, extraLanguages,
     providerHeaders:{[authHeader]:env.JUDGE0_AUTH_TOKEN,...(env.JUDGE0_RAPIDAPI_HOST?{'X-RapidAPI-Host':env.JUDGE0_RAPIDAPI_HOST}:{})} };
 }
-export function validateSubmission(data) {
+export function validateSubmission(data,allowedLanguages=LANGS) {
   if(!data||typeof data!=='object'||Array.isArray(data)||Object.keys(data).some(k=>!['language','source','stdin'].includes(k))) throw new APIError(400,'invalid_request','Only language, source, and stdin are accepted.');
-  if(!Object.hasOwn(LANGS,data.language)) throw new APIError(400,'language','Use c or cpp.');
+  if(typeof data.language!=='string'||!Object.hasOwn(allowedLanguages,data.language)) throw new APIError(400,'language','Choose a language returned by /v1/languages.');
   if(typeof data.source!=='string'||!data.source.trim()||Buffer.byteLength(data.source)>POLICY.sourceBytes||data.source.includes('\0')) throw new APIError(400,'source','Source must be nonempty UTF-8 text, at most 32 KiB, without NUL bytes.');
   const stdin=data.stdin??'';
   if(typeof stdin!=='string'||Buffer.byteLength(stdin)>POLICY.stdinBytes||stdin.includes('\0')) throw new APIError(400,'stdin','Input must be UTF-8 text, at most 16 KiB, without NUL bytes.');
@@ -48,7 +51,7 @@ export function validateSubmission(data) {
 }
 export function providerPayload(data,ids) {
   return {language_id:ids[data.language],source_code:Buffer.from(data.source).toString('base64'),stdin:Buffer.from(data.stdin).toString('base64'),
-    compiler_options:LANGS[data.language].flags,cpu_time_limit:POLICY.cpuSeconds,cpu_extra_time:POLICY.cpuExtraSeconds,
+    ...(LANGS[data.language]?.flags?{compiler_options:LANGS[data.language].flags}:{}),cpu_time_limit:POLICY.cpuSeconds,cpu_extra_time:POLICY.cpuExtraSeconds,
     wall_time_limit:POLICY.wallSeconds,memory_limit:POLICY.memoryKb,stack_limit:POLICY.stackKb,
     max_file_size:POLICY.fileKb,max_processes_and_or_threads:POLICY.processes,
     enable_per_process_and_thread_time_limit:false,enable_per_process_and_thread_memory_limit:false,
@@ -85,9 +88,12 @@ export function createJudge0(config,fetchImpl=fetch) {
     async check(){
       const langs=await request('/languages');
       if(!Array.isArray(langs))throw Error('Invalid provider languages.');
+      const usable=langs.filter(l=>Number.isSafeInteger(l.id)&&l.id>0&&l.id<1000000&&typeof l.name==='string'&&l.name.length<200&&!/executable|multi.file/i.test(l.name));
+      if(config.extraLanguages==='all')for(const l of usable){if(!Object.values(config.languageIds).includes(l.id))config.languageIds['judge0-'+l.id]=l.id;}
       for(const [key,id] of Object.entries(config.languageIds)){
         const name=langs.find(l=>l.id===id)?.name||'';
-        if(!(key==='c'?/^C \(GCC /:/^C\+\+ \(GCC /).test(name))throw Error('Configured language IDs must map to GCC C and GCC C++.');
+        if(['c','cpp'].includes(key)&&!(key==='c'?/^C \(GCC /:/^C\+\+ \(GCC /).test(name))throw Error('Configured language IDs must map to GCC C and GCC C++.');
+        if(!usable.some(l=>l.id===id))throw Error('Configured runtime is unavailable or requires executable/multi-file input.');
       }
       const policy=await request('/config_info');
       // Fail closed when the provider advertises a network-enabled default or
@@ -148,12 +154,12 @@ export function createApp(config,{judge=createJudge0(config),clock=Date.now,paus
       refreshLimits();if(++requests>POLICY.requestsPerMinute)throw new APIError(429,'rate_limit','Request rate exceeded. Retry in a minute.');
       clean();
       if(!ready)throw new APIError(503,'not_ready','Execution service is not ready.');
-      if(req.method==='GET'&&req.url==='/v1/languages'){send(res,200,{languages:Object.entries(LANGS).map(([id,x])=>({id,label:x.label})),compilerVersions:languages,limits:POLICY},origin);return;}
+      if(req.method==='GET'&&req.url==='/v1/languages'){send(res,200,{languages:Object.entries(config.languageIds).map(([id,providerId])=>({id,label:LANGS[id]?.label||languages.find(l=>l.id===providerId)?.name||id})),compilerVersions:languages,limits:POLICY},origin);return;}
       if(req.method==='POST'&&req.url==='/v1/submissions'){
         if(submissions>=POLICY.submissionsPerMinute)throw new APIError(429,'rate_limit','At most 10 submissions per minute.');
         // Reserve admission before awaiting any request-body bytes.
         if(active>=POLICY.concurrentJobs||jobs.size+active>=POLICY.retainedJobs)throw new APIError(429,'busy','Execution slots are full. Try again shortly.');
-        active++;submissions++;let data;try{data=validateSubmission(await bodyJSON(req));}catch(e){active--;throw e;}
+        active++;submissions++;let data;try{data=validateSubmission(await bodyJSON(req),config.languageIds);}catch(e){active--;throw e;}
         const j={id:randomUUID(),language:data.language,createdAt:new Date(clock()).toISOString(),result:{status:'queued',done:false}};jobs.set(j.id,j);
         void run(j,data);send(res,202,{...publicJob(j),pollAfterMs:POLICY.pollMs},origin);return;
       }
