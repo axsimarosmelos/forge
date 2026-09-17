@@ -74,6 +74,43 @@ for(const track of ['c','cpp','atlas'])action(`location.hash='#native/${track}';
 action(`location.hash='#lab';ForgeNative.changeLanguage('cpp');render()`);assert(el('#app').innerHTML.includes('Connect compiler service'));assert(el('#app').innerHTML.includes('native-highlight'));
 // Compiled lesson renders all Markdown sections, tables and code safely.
 assert(article.includes('<table>'));assert(article.includes('Scoreboard Thresholds'));assert(article.includes('&lt;iostream&gt;'));
+// Deep Practice shares backup, journal and recall state without granting solves.
+action(`location.hash='#deep';render()`);
+assert(el('#app').innerHTML.includes('One chunk. One clear test.'));
+const oldSolves = run('state.study.attempts.length');
+const oldCards = run('state.cards.length');
+action(`ForgeDeepPractice.start({preventDefault(){},target:{chunk:'Trace <script>bad()</script>',criterion:'Predict the empty-input result',duration:'360'}})`);
+assert(el('#app').innerHTML.includes('&lt;script&gt;bad()&lt;/script&gt;'));
+action(`ForgeDeepPractice.draft('attempt','Persist this draft');ForgeDeepPractice.pause()`);
+equal('validate(JSON.parse(localStorage.getItem(KEY))).deepPractice.active.draft.attempt','Persist this draft');
+equal('state.deepPractice.active.runningSince',null);
+action(`ForgeDeepPractice.record({preventDefault(){},target:{attempt:'Trace []',evidence:'Read outside the array',outcome:'miss',mistake:'Index was not guarded',adjustment:'Check length first'}})`);
+equal('state.deepPractice.active.reps.length',1);
+assert(el('#app').innerHTML.includes('Retry the same chunk.'));
+action(`ForgeDeepPractice.record({preventDefault(){},target:{attempt:'Trace [] again',evidence:'No array access',outcome:'clean'}})`);
+equal('ForgeDeepPracticeCore.stats(state.deepPractice.active.reps).repaired',1);
+action(`ForgeDeepPractice.finish({preventDefault(){},target:{nextStep:'Trace one item tomorrow',coachNote:'Ask a peer about the condition'}});ForgeDeepPractice.finish({preventDefault(){},target:{nextStep:'Duplicate'}})`);
+equal('state.deepPractice.sessions.length',1);
+equal('state.deepPractice.active',null);
+equal('state.study.attempts.length',oldSolves);
+equal('state.cards.length',oldCards+1);
+assert(run('state.cards.at(-1).due > Date.now()+86300000'));
+assert(run('state.journal.at(-1).note.includes("Index was not guarded")'));
+assert(run('validate(JSON.parse(localStorage.getItem(KEY))).deepPractice.sessions.length===1'));
+equal('(()=>{const old=JSON.parse(JSON.stringify(state));delete old.deepPractice;return validate(old).version})()',1);
+assert.throws(()=>run('validate({...state,deepPractice:{...state.deepPractice,active:{}}})'));
+// Revealed workspace help cannot be logged as a clean repetition, even after serialization.
+action(`ForgeStudy.acceptCatalog({platform:'LeetCode',fetchedAt:'2026-09-17',problems:[{id:'lc-1',number:1,platform:'LeetCode',title:'Two Sum',url:'https://leetcode.com/problems/two-sum/',difficulty:'Easy',rating:null,tags:[],premium:false,kind:'algorithm'}]});ForgeDeepPractice.open('lc-1');ForgeDeepPractice.start({preventDefault(){},target:{chunk:'Check a map',criterion:'Explain the lookup',duration:'360'}});ForgeStudy.markHelp('lc-1');state=validate(JSON.parse(JSON.stringify(state)));ForgeDeepPractice.record({preventDefault(){},target:{attempt:'Looked up a key',evidence:'Found its value',outcome:'clean'}})`);
+equal('state.deepPractice.active.reps.length',0);
+equal('state.deepPractice.active.draft.outcome','guided');
+action(`ForgeDeepPractice.record({preventDefault(){},target:{attempt:'Looked up a key',evidence:'Found its value',outcome:'guided',mistake:'Needed the lookup example',adjustment:'Close it and recall the operation'}})`);
+equal('state.deepPractice.active.reps[0].outcome','guided');
+action(`ForgeDeepPractice.record({preventDefault(){},target:{attempt:'Closed the example',evidence:'Reproduced the lookup unaided',outcome:'clean'}})`);
+equal('state.deepPractice.active.reps[1].outcome','clean');
+action(`ForgeDeepPractice.discard()`);
+console.log('PASS: deep-practice routes, escaping, persisted drafts, mistake/retry workflow, journal/recall, legacy backups and guided-work honesty.');
+action(`location.hash='#lab';render()`);
+
 (async()=>{
   const requests=[];sandbox.fetch=async(url,options)=>{requests.push({url,options});return {ok:true,json:async()=>({languages:[{id:'c'},{id:'cpp'}]})};};
   const token='t'.repeat(64);sandbox.connectionForm={url:'https://first.example.com',token,querySelector:()=>({disabled:false})};

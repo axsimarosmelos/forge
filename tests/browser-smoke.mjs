@@ -5,6 +5,7 @@ import {resolve,extname,sep} from 'node:path';
 import {tmpdir} from 'node:os';
 import {spawn} from 'node:child_process';
 import assert from 'node:assert/strict';
+import {checkDeepPractice} from './deep-practice-browser.mjs';
 const root=resolve(import.meta.dirname,'..'),profile=await mkdtemp(resolve(tmpdir(),'forge-browser-'));
 const mime={'.html':'text/html','.json':'application/json','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml'};
 const server=createServer(async(req,res)=>{try{const pathname=decodeURIComponent(new URL(req.url,'http://local').pathname).replace(/^\/forge\//,'/');const file=resolve(root,'.'+(pathname==='/'?'/index.html':pathname));if(!file.startsWith(root+sep))throw Error('Invalid path');const data=await readFile(file);res.writeHead(200,{'Content-Type':mime[extname(file)]||'text/plain','Cache-Control':'no-store'});res.end(data);}catch{res.writeHead(404);res.end('Not found');}});
@@ -31,6 +32,7 @@ try{
   await send('Page.navigate',{url:`http://127.0.0.1:${port}/forge/#practice`});
   await until('typeof ForgeStudy!=="undefined" && ForgeStudy.allProblems().length>20000');
   await evaluate('ForgeWorkspaceStorage.ready');
+  await checkDeepPractice({evaluate,route,until,send,screenshot});
   const manifest=JSON.parse(await readFile(resolve(root,'content/catalog/manifest.json'),'utf8'));
   const counts=await evaluate('Object.fromEntries(ForgeCatalogCore.platforms.map(p=>[p,ForgeStudy.allProblems().filter(t=>t.platform===p).length]))');
   for(const [platform,key] of [['LeetCode','leetcode'],['Codeforces','codeforces'],['AtCoder','atcoder']])assert.equal(counts[platform],manifest.catalogs[key].count);
@@ -88,7 +90,7 @@ try{
   assert.equal(await evaluate('Object.keys(state.study.workspaces).length'),0,'old drafts must not reappear after reset');
   assert.equal(await evaluate('state.cards.length'),0);
   // Third-party frames can have their own errors. Record any exceptions for diagnosis.
-  const report={result:'PASS',counts,references:115,checks:['catalog search/pagination','embedded editorial/video','IndexedDB reload','legacy progress','guided attempts and recall','Python execution/error','four-month dates','mobile layout','backup/import/reset'],runtimeErrors};
+  const report={result:'PASS',counts,references:115,checks:['deep-practice forms/retries/timer/mobile/backup', 'catalog search/pagination','embedded editorial/video','IndexedDB reload','legacy progress','guided attempts and recall','Python execution/error','four-month dates','mobile layout','backup/import/reset'],runtimeErrors};
   await writeFile(resolve(root,'test-results/browser-report.json'),JSON.stringify(report,null,2));console.log(JSON.stringify(report,null,2));
 }catch(error){let page='';try{await screenshot('failure');page=await evaluate('document.querySelector("#app")?.innerText.slice(0,6000)');console.error('PAGE:',page);}catch{}await mkdir(resolve(root,'test-results'),{recursive:true});await writeFile(resolve(root,'test-results/browser-report.json'),JSON.stringify({result:'FAIL',error:error.message,stack:error.stack,page,runtimeErrors},null,2));throw error;}
 finally{ws?.close();chrome.kill('SIGTERM');server.closeAllConnections();server.close();await rm(profile,{recursive:true,force:true,maxRetries:5,retryDelay:100});}

@@ -1,0 +1,20 @@
+.deep-principles{display:flex;flex-wrap:wrap;gap:12px 28px;padding:0 0 24px;color:var(--muted,#6d7966);font-size:12px;border-bottom:1px solid var(--line,#dce2d6);margin-bottom:24px}
+.deep-layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,1fr);gap:22px;align-items:start}
+.deep-layout>*{min-width:0}.deep-layout h2{margin:12px 0 16px}.deep-layout p{line-height:1.7}
+.deep-setup form,.deep-session form,.deep-reflect form,.deep-ignition form{margin-top:24px}
+.deep-layout textarea,.deep-ignition textarea{min-height:80px;resize:vertical;line-height:1.6}
+.deep-presets{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}
+.deep-method{background:#f1f5ea}.deep-method ol{padding-left:20px}.deep-method li{padding:10px 0;font-size:13px;line-height:1.8}
+.deep-purpose{padding:18px 22px;border-left:3px solid #78935c;background:#f0f5e9;margin-bottom:24px;line-height:1.9;overflow-wrap:anywhere}
+.deep-session h2,.deep-history summary,.deep-banner h2{overflow-wrap:anywhere}
+.deep-session .between{gap:20px}.deep-clock{display:flex;align-items:center;gap:12px}.deep-clock [role=timer]{font-family:ui-monospace,monospace;font-size:30px;font-variant-numeric:tabular-nums;letter-spacing:-1px}
+.deep-criterion{border-left:2px solid #8da774;padding-left:14px;overflow-wrap:anywhere}
+.deep-coach{background:#edf3e6}.deep-coach[data-zone=simplify]{background:#fbf2e1}.deep-coach[data-zone=stretch]{background:#eaf1f8}
+.deep-counts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:24px 0}.deep-counts div{display:flex;flex-direction:column;gap:7px}.deep-counts strong{font-size:26px;font-weight:500}.deep-counts span{font-size:10px;line-height:1.5}
+.deep-retry{margin:24px 0}.deep-retry p{margin:8px 0;overflow-wrap:anywhere}
+.deep-reflect{grid-column:1}.deep-rep-list{grid-column:2;overflow-wrap:anywhere}.deep-rep-list details,.deep-history>details{border-top:1px solid var(--line,#dce2d6);padding:16px 0}.deep-rep-list summary,.deep-history summary{line-height:1.7}.deep-rep-list p,.deep-history p{font-size:13px;line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere}
+.deep-history,.deep-ignition{margin-top:24px}.deep-history .deep-rep-list{margin-top:20px;box-shadow:none}.deep-history .btn{margin:8px 8px 8px 0}.deep-source{margin:28px 0;line-height:1.8}
+.deep-banner{display:flex;justify-content:space-between;align-items:center;gap:22px;margin-bottom:24px;border-color:#cbd9bc;background:#edf3e6}.deep-banner h2{font-size:22px;margin:10px 0}.deep-banner p{margin-bottom:0}.deep-banner>.btn{flex-shrink:0}
+[hidden]{display:none!important}
+@media(max-width:1050px){.deep-layout{grid-template-columns:1fr}.deep-reflect,.deep-rep-list{grid-column:auto}.deep-banner{flex-direction:column;align-items:flex-start}}
+@media(max-width:650px){.deep-principles{gap:10px;font-size:10px}.deep-clock [role=timer]{font-size:25px}.deep-layout{gap:16px}.deep-banner h2{font-size:21px}.deep-counts strong{font-size:24px}}

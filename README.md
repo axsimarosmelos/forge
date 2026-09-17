@@ -11,6 +11,15 @@ A personal competitive-programming studio with Python, C and C++ lessons, a sear
 3. **Problem library**: search LeetCode, Codeforces and AtCoder by title, ID and tags; filter difficulty, progress, selected videos and community solutions.
 4. **Problem workspace**: write code, run your chosen input, watch a selected walkthrough, reveal solutions, save notes and record an honest attempt.
 5. **Review**: retrieve the idea from memory, rate your recall and revisit it later. Turn problem notes into recall cards.
+6. **Deep Practice**: isolate one skill, define a clean repetition, then attempt → notice → adjust → retry. Start from Today or a problem workspace. A 3-, 6-, or 10-minute timer survives navigation and reloads, with pause/resume. Save a reflection to add a mistake-journal entry and next-day recall.
+
+## Deep Practice
+
+The studio applies ideas from the supplied Daniel Coyle / Big Think Clips transcript: small chunks, useful errors, slow repetition, role models, and learning from feedback. Save a personal motivation cue, then log what you tried and the evidence you observed. Missed and guided repetitions require a diagnosis and a specific adjustment before the next retry.
+
+Coaching considers the last ten repetitions of the current chunk, after at least five records: over 90% clean suggests a small stretch, below 70% suggests a smaller chunk, and the middle band suggests staying with the challenge. This is a transparent practice heuristic inspired by the talk's roughly 80% success guideline, not an empirical mastery estimate or a guaranteed rate of improvement. All outcomes are self-reported. Repetitions never count as platform solves, and opening help in a linked workspace prevents that repetition from being recorded as clean.
+
+The notebook keeps up to 200 sessions with up to 50 repetitions each. Active drafts, timer state, motivation, and completed sessions are included in existing progress backups. Export before clearing the notebook; clearing saved sessions retains their journal entries and recall cards. Peer/role-model notes are private local reflections, not a shared community or messaging feature.
 
 ## Current coverage
 
@@ -50,5 +59,6 @@ Open the HTTP-served site; file URLs do not load catalog JSON. Commit rebuilt in
 - [Curriculum JSON](content/curriculum.json) and [complete STL module](content/cpp-stl-fast-io.md)
 - [Lesson references](content/lesson-references.json) and [original task briefs](content/problem-briefs.json)
 - [Planning rules](frontend/catalog-core.js), [study UI](frontend/study.js), [draft persistence](frontend/workspace-storage.js)
+- [Deep-practice rules](frontend/deep-practice-core.js), [studio UI](frontend/deep-practice.js), [design and limits](content/deep-practice-design.md)
 - [Native editor](frontend/native.js), [backend](backend/server.mjs), [templates](templates)
 - [Chromium checks](.github/workflows/browser-checks.yml): catalog rendering, Python execution, IndexedDB reload, mobile sizing and backup/import/reset

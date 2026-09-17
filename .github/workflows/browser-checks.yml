@@ -1,6 +1,8 @@
 name: Check Forge in Chromium
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [main]
   push:
     branches: [main]
     paths:
@@ -12,7 +14,7 @@ permissions:
   contents: read
   checks: write
 concurrency:
-  group: forge-browser-checks
+  group: forge-browser-checks-${{ github.ref }}
   cancel-in-progress: true
 jobs:
   browser:
@@ -26,6 +28,7 @@ jobs:
       - name: Planning, source and frontend regressions
         run: |
           node tests/catalog-core.cjs
+          node tests/deep-practice.cjs
           node tests/frontend.cjs
           python3 tests/catalog_sources.py
       - name: Test the built site in a real browser
